@@ -45,7 +45,7 @@ export function ProjectArchive() {
         {/* Monumental Editorial Project Showcase */}
         <div className="space-y-12 mb-16">
           {PROJECTS.map((project, idx) => {
-            const isWyther = project.id === 'wyther';
+            const isWyther = project.id === 'wythher';
             const isVedavarti = project.id === 'vedavarti';
             const isCanezz = project.id === 'canezz';
             const isIndicall = project.id === 'indicall';

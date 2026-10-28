@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, Layers, ExternalLink, Github } from 'lucide-react';
 import { Project } from '../types';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -91,9 +93,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <span className="font-tech text-xs text-[#FF2A2A] tracking-widest uppercase">
                 {project.role}
               </span>
-              <h2 id="project-modal-title" className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-tight mt-1">
+              <FitText as="h2" text={project.title} max={4.5} className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-white uppercase tracking-tight mt-1" id="project-modal-title">
                 {project.title}
-              </h2>
+              </FitText>
               <p className="font-editorial italic text-2xl sm:text-3xl text-neutral-300 mt-2">
                 "{project.tagline}"
               </p>
@@ -186,6 +188,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {(project.liveUrl || project.repositoryUrl) && (
               <div className="flex flex-wrap gap-3 border-t border-white/10 pt-8 font-tech text-xs font-bold">
+                <Link to={`/work/${project.id}`} onClick={onClose} className="inline-flex items-center gap-2 px-4 py-3 bg-[#FF2A2A] text-white hover:bg-white hover:text-black transition-colors">FULL CASE STUDY →</Link>
                 {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-3 bg-white text-black hover:bg-[#FF2A2A] hover:text-white transition-colors"><ExternalLink className="w-4 h-4" />VIEW LIVE PRODUCT</a>}
                 {project.repositoryUrl && <a href={project.repositoryUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-3 border border-white/30 hover:border-[#FF2A2A] transition-colors"><Github className="w-4 h-4" />VIEW SOURCE</a>}
               </div>

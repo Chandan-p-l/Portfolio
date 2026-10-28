@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
+import { fitVars } from '../utils/fit';
 
 export function Philosophy() {
   return (
@@ -17,8 +18,8 @@ export function Philosophy() {
       </div>
 
       {/* Fullscreen Sequential Typography Presence */}
-      <div className="max-w-7xl w-full mx-auto my-auto py-16 text-center space-y-8 sm:space-y-12">
-        <div className="space-y-4 sm:space-y-8 font-display font-black tracking-tighter text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] leading-[0.88] uppercase text-white">
+      <div className="fit-box max-w-7xl w-full mx-auto my-auto py-16 text-center space-y-8 sm:space-y-12">
+        <div style={fitVars('REPEAT.', 11)} className="fit space-y-4 sm:space-y-8 font-display font-black tracking-tighter leading-[0.88] uppercase text-white">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

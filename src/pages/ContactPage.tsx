@@ -1,6 +1,7 @@
 import { PageTransition } from '../components/PageTransition';
 import { Footer } from '../components/Footer';
 import { Contact } from '../components/Contact';
+import { FitText } from '../components/FitText';
 
 export function ContactPage() {
   return (
@@ -14,16 +15,16 @@ export function ContactPage() {
                 <span className="text-[#FF2B2B] font-bold">06 // DIRECT DISPATCH</span>
                 <span className="text-white">CONTACT CHANDAN PAL</span>
               </div>
-              <span className="text-emerald-400">RESPONSE LATENCY &lt; 24H</span>
+              <span className="text-emerald-400">OPEN TO ROLES</span>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
+            <FitText as="h1" text="LET'S BUILD SOMETHING REAL." max={8} className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
               LET'S BUILD<br />
               <span className="text-[#FF2B2B]">SOMETHING REAL.</span>
-            </h1>
+            </FitText>
 
             <p className="font-sans text-xl sm:text-2xl text-neutral-300 font-light max-w-3xl leading-relaxed">
-              Open for technical leadership, high-scale engineering, co-founding ventures, and creative-tech collaborations.
+              Open to full-stack and frontend engineering roles, freelance product builds and technical collaborations.
             </p>
           </div>
         </section>

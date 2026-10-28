@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { sound } from '../utils/sound';
+import { SITE } from '../site';
 
 export function Footer() {
   return (
@@ -15,7 +16,7 @@ export function Footer() {
             CHANDAN PAL<span className="text-[#FF2B2B]">®</span>
           </Link>
           <div className="text-[11px] text-[#8A8A84]">
-            COMPUTER SCIENCE STUDENT · DEVELOPER · CTO · BUILDER
+            DEVELOPER · CTO & CO-FOUNDER, VAGMED INDIA · AUTHOR
           </div>
           <div className="text-[10px] text-neutral-500">
             26.9124° N, 75.7873° E · JAIPUR, INDIA
@@ -29,7 +30,7 @@ export function Footer() {
             { label: 'WORK', path: '/work' },
             { label: 'ABOUT', path: '/about' },
             { label: 'LAB', path: '/lab' },
-            { label: 'CONTENT', path: '/content' },
+            { label: 'BLOG', path: '/blog' },
             { label: 'CONTACT', path: '/contact' },
           ].map((item) => (
             <Link
@@ -47,9 +48,9 @@ export function Footer() {
         {/* Right Status */}
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/thechandanpal"
+            href={SITE.socials.github}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             className="flex items-center gap-1 text-white hover:text-[#FF2B2B] transition-colors"
           >
@@ -58,20 +59,20 @@ export function Footer() {
           </a>
           <span>//</span>
           <a
-            href="https://x.com/thechandanpal"
+            href={SITE.socials.instagram}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             className="flex items-center gap-1 text-white hover:text-[#FF2B2B] transition-colors"
           >
-            <span>X (TWITTER)</span>
+            <span>INSTAGRAM</span>
             <ArrowUpRight className="w-3 h-3" />
           </a>
           <span>//</span>
           <a
-            href="https://linkedin.com/in/thechandanpal"
+            href={SITE.socials.linkedin}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             className="flex items-center gap-1 text-white hover:text-[#FF2B2B] transition-colors"
           >
@@ -82,8 +83,10 @@ export function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[10px] text-neutral-600">
-        <span>© 2026 CHANDAN PAL. ALL RIGHTS RESERVED.</span>
-        <span>ENGINEERED WITH REACT, TYPESCRIPT & TAILWIND CSS</span>
+        <span>© 2026 CHANDAN PAL · {SITE.email.toUpperCase()}</span>
+        <span>
+          <a href="/rss.xml" className="hover:text-[#FF2B2B]">RSS</a> · <a href="/sitemap.xml" className="hover:text-[#FF2B2B]">SITEMAP</a> · <a href="/llms.txt" className="hover:text-[#FF2B2B]">LLMS.TXT</a>
+        </span>
       </div>
     </footer>
   );

@@ -6,6 +6,7 @@ export interface Project {
   role: string;
   year: string;
   category: string;
+  kind?: string;
   summary: string;
   tagline: string;
   heroImage?: string;

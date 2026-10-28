@@ -5,6 +5,7 @@ import { TechLab } from '../components/TechLab';
 import { InteractiveSandbox } from '../components/InteractiveSandbox';
 import { BehindTheScreen } from '../components/BehindTheScreen';
 import { sound } from '../utils/sound';
+import { FitText } from '../components/FitText';
 
 export function LabPage() {
   return (
@@ -21,10 +22,10 @@ export function LabPage() {
               <span className="text-emerald-400">ENGINE: ACTIVE PROBE</span>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
+            <FitText as="h1" text="THE TECH LAB & SANDBOX." max={8} className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
               THE TECH LAB &<br />
               <span className="text-[#FF2B2B]">SANDBOX.</span>
-            </h1>
+            </FitText>
 
             <p className="font-sans text-xl sm:text-2xl text-neutral-300 font-light max-w-3xl leading-relaxed">
               Interactive runtime profilers, physics-based canvas experiments, Web Audio synthesis, and real-time backend packet lifecycle simulations.

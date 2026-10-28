@@ -384,7 +384,7 @@ export function Hero() {
               <div className="hidden lg:flex flex-col text-right font-tech text-xs text-[#8A8A84] space-y-1">
                 <span className="text-white font-bold tracking-widest uppercase">CHANDAN PAL®</span>
                 <span className="text-[#FF2B2B]">CREATIVE TECHNOLOGIST</span>
-                <span>CTO / CO-FOUNDER @ WYTHER</span>
+                <span>CTO / CO-FOUNDER @ WYTHHER</span>
               </div>
             </motion.div>
           </div>
@@ -406,8 +406,8 @@ export function Hero() {
             <div className="hero-portrait-zone relative w-72 sm:w-96 md:w-[29rem] lg:w-[34rem] aspect-[3/4] max-h-[620px] flex items-center justify-center">
               {/* Rim Lighting & Red Glow */}
               <div className="absolute inset-0 bg-[#FF2B2B]/15 blur-3xl rounded-full pointer-events-none transform scale-90" />
-              <img src="/hero-portrait.png" alt="" aria-hidden="true" className="hero-ghost hero-ghost-red absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none" />
-              <img src="/hero-portrait.png" alt="" aria-hidden="true" className="hero-ghost hero-ghost-blue absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none" />
+              <img src="/chandan-pal.webp" alt="" aria-hidden="true" className="hero-ghost hero-ghost-red absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none" />
+              <img src="/chandan-pal.webp" alt="" aria-hidden="true" className="hero-ghost hero-ghost-blue absolute inset-0 h-full w-full object-contain object-bottom pointer-events-none" />
               <div className="hero-orbit absolute -inset-12 sm:-inset-20 pointer-events-none" aria-hidden="true"><span>CHANDAN PAL — BUILDER — SYSTEMS — DESIGN — </span></div>
 
               {/* Portrait Silhouette Layer with Tactical Shading & Edge Light */}
@@ -415,7 +415,7 @@ export function Hero() {
                 {/* Visual Portrait Matrix Cutout */}
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black via-neutral-900 to-[#141414]">
                   <img
-                    src="/hero-portrait.png"
+                    src="/chandan-pal.webp"
                     alt="Chandan Pal"
                     className="relative z-10 h-full w-full object-contain object-bottom px-1 pt-2 filter contrast-110 saturate-90 group-hover:scale-[1.06] transition-transform duration-700"
                   />

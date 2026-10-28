@@ -6,91 +6,92 @@ import { PageTransition } from '../components/PageTransition';
 import { Footer } from '../components/Footer';
 import { sound } from '../utils/sound';
 import { PROJECTS } from '../data/portfolioData';
+import { FitText } from '../components/FitText';
 
-const wytherProject = PROJECTS.find((p) => p.id === 'wyther') || PROJECTS[0];
+const wytherProject = PROJECTS.find((p) => p.id === 'wythher') || PROJECTS[0];
 
 const CHAPTERS = [
   {
     id: 'problem',
     num: '01',
     title: 'THE PROBLEM',
-    headline: 'OFF-THE-SHELF TEMPLATES ARE BROKEN FOR HIGH-CONVERSION D2C.',
-    body: 'Traditional e-commerce templates are bloated with unnecessary JavaScript trackers, slow page render times, and rigid checkout structures that destroy customer momentum.',
-    insight: 'Friction in the first 3 seconds directly kills 40%+ of mobile conversions.',
-    deliverable: 'Zero-bloat custom architecture with sub-second First Contentful Paint',
+    headline: 'PERIOD CARE IN INDIA NEEDED TRUST, NOT TEMPLATES.',
+    body: 'WythHer sells stage-based period care — first periods, teens, adults. A brand like that lives or dies on trust and on how easy it is to buy, so the storefront had to feel premium, explain the product clearly and load fast on everyday phones.',
+    insight: 'For a first-time buyer, a confusing checkout is a reason to walk away.',
+    deliverable: 'A storefront designed around clarity, trust and speed',
   },
   {
     id: 'product',
     num: '02',
     title: 'THE PRODUCT',
-    headline: 'AN ULTRA-FAST, MINIMALIST D2C COMMERCE PLATFORM.',
-    body: 'WythHer was engineered from raw whiteboards to a complete production storefront. We united minimalist brutalist typography, bespoke product bundle selectors, instant cart drawers, and frictionless mobile checkouts.',
-    insight: '100% custom-crafted storefront with zero template dependencies.',
-    deliverable: 'Custom React Storefront & Modular Product Bundle Engine',
+    headline: 'A MODERN D2C STOREFRONT FOR A LIFECYCLE BRAND.',
+    body: 'I built wythher.com with React and Next.js on Vercel. Product pages for kits like the Moody Box explain what is inside, how the pad is made and why it is safe — in the brand\'s warm, older-sister voice.',
+    insight: 'The product page is the sales conversation.',
+    deliverable: 'Next.js storefront deployed on Vercel',
   },
   {
     id: 'experience',
     num: '03',
-    title: 'THE EXPERIENCE & DESIGN',
-    headline: 'TACTILE MICRO-INTERACTIONS & SEAMLESS CHECKOUT FLOWS.',
-    body: 'Designed every touchpoint in Figma before writing a single line of code. Smooth quantity drawers, responsive order summaries, real-time inventory verification, and localized payment gateways (UPI, Cards, NetBanking).',
-    insight: 'Micro-animations convey tactile reassurance during high-value payment transactions.',
-    deliverable: 'Complete Design System & High-Fidelity Mobile Interfaces',
+    title: 'THE EXPERIENCE & CHECKOUT',
+    headline: 'ONLINE PAYMENTS AND CASH ON DELIVERY.',
+    body: 'Checkout supports Razorpay for UPI, cards and net banking, plus cash on delivery — because COD still matters for first-time buyers in India. Orders are verified server-side, never trusted from the browser alone.',
+    insight: 'Supporting COD can matter more than any animation.',
+    deliverable: 'Razorpay + COD checkout flow',
   },
   {
     id: 'system',
     num: '04',
     title: 'THE ROLE & SYSTEM',
     headline: '"I DIDN\'T JUST BUILD THE WEBSITE. I HELPED BUILD THE SYSTEM."',
-    body: 'As CTO and Co-Founder, my responsibility extended beyond code. I engineered the entire operational nervous system: payment webhook reconciliation, automated inventory sync, courier dispatch APIs, and real-time customer tracking.',
-    insight: 'Software is merely a vehicle for operational excellence and customer delight.',
-    deliverable: 'End-to-End Operational Pipeline & Automated Fulfillment Engine',
+    body: 'As CTO and Co-founder of VagMed India, my work goes beyond the storefront: a full D2C admin platform for orders, inventory, customers and content, plus technology strategy, tooling choices and market analysis for the company.',
+    insight: 'Software is a vehicle for operations and customer trust.',
+    deliverable: 'Full D2C admin platform',
   },
   {
     id: 'architecture',
     num: '05',
-    title: 'THE ARCHITECTURE & CLOUD',
-    headline: 'DECOUPLED, CLUSTERED & FAULT-TOLERANT CLOUD STACK.',
-    body: 'Engineered a resilient multi-tier topology: React client on edge CDN -> Nginx reverse proxy with SSL termination and rate limiting -> Express.js API cluster running on multi-core PM2 instances -> Hybrid SQL & Document database tier -> Idempotent asynchronous webhook event bus.',
-    insight: 'Idempotent webhook handlers ensure zero duplicate charges or lost orders during network blips.',
-    deliverable: 'High-Availability Linux Infrastructure & REST API Microservices',
+    title: 'THE ARCHITECTURE',
+    headline: 'A LEAN STACK A SMALL TEAM CAN RUN.',
+    body: 'The storefront runs on Next.js and Vercel. Data and admin services use Supabase, Firebase and PHP with MySQL. Payments go through Razorpay with server-side verification. The goal: reliable, cheap to operate and easy to change quickly.',
+    insight: 'For a startup, the best architecture is the one you can ship and maintain.',
+    deliverable: 'Storefront, admin, data and payments — one backbone',
   },
   {
-    id: 'branding',
+    id: 'content',
     num: '06',
-    title: 'BRANDING & PACKAGING',
-    headline: 'PHYSICAL PACKAGING MEETS DIGITAL MINIMALISM.',
-    body: 'Co-directed the visual language across packaging boxes, unboxing inserts, courier tape, and digital email invoices. High-contrast typography paired with deep monochrome textures to create an unmistakable luxury impression.',
-    insight: 'A brand is a unified emotional promise spanning screen pixels to cardboard textures.',
-    deliverable: 'Physical Packaging Specifications, Typography Tokens, Unboxing Assets',
+    title: 'CONTENT & SEO',
+    headline: 'THE WYTHHER JOURNAL.',
+    body: 'The site runs the WythHer Journal — articles on pad changing, rashes, leaks, fatigue during periods and talking to young people about first periods. Technical SEO and structured data were part of the build from day one.',
+    insight: 'Education builds trust before the first purchase.',
+    deliverable: 'SEO-first educational content hub',
   },
   {
     id: 'launch',
     num: '07',
-    title: 'LAUNCH & SCALE',
-    headline: 'ZERO-DOWNTIME ROLLOUT & REAL-TIME ERROR TELEMETRY.',
-    body: 'Executed production release with automated CI/CD pipeline, automated SSL certificate renewal, log rotation via Winston, and real-time server health alarms. Maintained 99.98% uptime with zero critical payment drops.',
-    insight: 'Shipping live is when true engineering begins: measuring telemetry, conversion funnels, and real user feedback.',
-    deliverable: 'Production Deployment & Continuous Monitoring Dashboard',
+    title: 'LAUNCH & ITERATE',
+    headline: 'SHIPPING IS WHERE THE REAL WORK BEGINS.',
+    body: 'WythHer is launching in 2026. Every release is measured against real behaviour — what people read, where they hesitate, what they buy — and the product improves from there.',
+    insight: 'Launch, measure, improve, repeat.',
+    deliverable: 'Live production storefront at wythher.com',
   }
 ];
 
 const SYSTEM_NODES = [
-  { name: 'PRODUCT STRATEGY', desc: 'Market discovery, bundle mechanics, unit economics' },
-  { name: 'UI / UX DESIGN', desc: 'Figma tokens, responsive mobile drawer, micro-interactions' },
-  { name: 'FRONTEND STOREFRONT', desc: 'React SPA, sub-second FCP, zero layout shift' },
-  { name: 'BACKEND REST API', desc: 'Express cluster, PM2 workers, request rate limiting' },
-  { name: 'DATABASE & TRANSACTIONS', desc: 'Relational orders/billing & document session caching' },
-  { name: 'AUTOMATION & WEBHOOKS', desc: 'Idempotent payment listeners, SMS dispatch, logistics' },
+  { name: 'PRODUCT STRATEGY', desc: 'Market analysis, kits, pricing inputs' },
+  { name: 'UI / UX', desc: 'Brand system on the web, mobile-first flows' },
+  { name: 'STOREFRONT', desc: 'Next.js on Vercel, fast product pages' },
+  { name: 'ADMIN PLATFORM', desc: 'Orders, inventory, customers, content' },
+  { name: 'DATA LAYER', desc: 'Supabase, Firebase, PHP + MySQL' },
+  { name: 'PAYMENTS & SEO', desc: 'Razorpay + COD, technical SEO, analytics' },
 ];
 
 const ARCH_LAYERS = [
-  { id: 'user', name: '01. USER & BROWSER', tech: 'Client Device', desc: 'Mobile/Desktop visitor initiating shopping session' },
-  { id: 'frontend', name: '02. FRONTEND STOREFRONT', tech: 'React · Tailwind CSS', desc: 'Zero-bloat SPA with instant cart & bundle selectors' },
-  { id: 'gateway', name: '03. EDGE NGINX INGRESS', tech: 'Nginx · Ubuntu · SSL', desc: 'Reverse proxy handling SSL, gzip, rate limiting' },
-  { id: 'api', name: '04. EXPRESS API CLUSTER', tech: 'Node.js · PM2', desc: 'Multi-worker API handling auth, carts, order processing' },
-  { id: 'db', name: '05. HYBRID DATA TIER', tech: 'MySQL · Supabase', desc: 'Relational transactions for orders + document caching' },
-  { id: 'webhooks', name: '06. ASYNC WEBHOOK SERVICES', tech: 'Payment & Courier', desc: 'Idempotent event listener & automated notifications' },
+  { id: 'user', name: '01. SHOPPER', tech: 'Mobile & desktop', desc: 'Visitors discovering kits and reading the Journal' },
+  { id: 'frontend', name: '02. STOREFRONT', tech: 'React · Next.js', desc: 'Product pages, cart and checkout' },
+  { id: 'gateway', name: '03. HOSTING & EDGE', tech: 'Vercel', desc: 'Global deployment, HTTPS and caching' },
+  { id: 'api', name: '04. ADMIN PLATFORM', tech: 'Full D2C admin', desc: 'Orders, inventory, customers and content' },
+  { id: 'db', name: '05. DATA TIER', tech: 'Supabase · Firebase · MySQL', desc: 'Products, orders and customer records' },
+  { id: 'webhooks', name: '06. PAYMENTS', tech: 'Razorpay · COD', desc: 'Online payments verified server-side, plus cash on delivery' },
 ];
 
 export function WytherPage() {
@@ -122,7 +123,7 @@ export function WytherPage() {
               className="fixed inset-0 z-[9999] bg-[#FF2B2B] text-black flex flex-col justify-between p-8 sm:p-16 select-none"
             >
               <div className="flex items-center justify-between font-tech text-xs tracking-widest font-bold border-b border-black/20 pb-4">
-                <span>WYTHER // CASE STUDY TRANSITION</span>
+                <span>WYTHHER // CASE STUDY TRANSITION</span>
                 <span>CP-2026</span>
               </div>
 
@@ -130,12 +131,12 @@ export function WytherPage() {
                 <div className="font-tech text-xs tracking-[0.4em] uppercase font-bold mb-4">
                   THE BUILD CYCLE
                 </div>
-                <h2 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-black tracking-tighter leading-[0.88] uppercase">
+                <FitText as="h2" text="IMPROVED." max={11} className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-black tracking-tighter leading-[0.88] uppercase">
                   BUILT.<br />
                   BROKEN.<br />
                   IMPROVED.<br />
                   SHIPPED.
-                </h2>
+                </FitText>
               </div>
 
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-black/20 pt-6">
@@ -181,20 +182,27 @@ export function WytherPage() {
             </div>
 
             <div className="font-tech text-xs text-[#FF2B2B] tracking-[0.3em] uppercase mb-2">
-              VENTURE SPEC // 2025 - 2026
+              VENTURE SPEC // VAGMED INDIA PRIVATE LIMITED
             </div>
 
-            <h1 className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[13rem] font-black tracking-tighter leading-none text-white uppercase mb-6 hover:text-[#FF2B2B] transition-colors">
-              WYTHER
-            </h1>
+            <FitText as="h1" text="WYTHHER" max={13} className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[13rem] font-black tracking-tighter leading-none text-white uppercase mb-6 hover:text-[#FF2B2B] transition-colors">
+              WYTHHER
+            </FitText>
 
             <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
               <span className="font-future text-base sm:text-xl text-neutral-300 tracking-wider">
-                FULL-STACK E-COMMERCE & BRAND PLATFORM
+                CTO & CO-FOUNDER · D2C STOREFRONT & ADMIN PLATFORM
               </span>
-              <div className="font-tech text-xs text-[#FF2B2B] border border-[#FF2B2B]/40 px-3 py-1 bg-[#FF2B2B]/10">
-                STATUS: PRODUCTION DEPLOYED
-              </div>
+              <a
+                href="https://wythher.com"
+                target="_blank"
+                rel="noopener"
+                onMouseEnter={() => sound.playHover()}
+                data-cursor-text="VISIT"
+                className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] border border-[#FF2B2B]/40 px-3 py-1 bg-[#FF2B2B]/10 hover:bg-[#FF2B2B] hover:text-black transition-colors"
+              >
+                LIVE · WYTHHER.COM <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </section>
@@ -267,13 +275,13 @@ export function WytherPage() {
                     className="space-y-6"
                   >
                     <div className="flex items-center justify-between border-b border-white/10 pb-4 font-tech text-xs">
-                      <span className="text-[#FF2B2B] font-bold">WYTHER // {CHAPTERS[activeChapter].title}</span>
+                      <span className="text-[#FF2B2B] font-bold">WYTHHER // {CHAPTERS[activeChapter].title}</span>
                       <span className="text-[#8A8A84]">CHAPTER 0{activeChapter + 1} OF 07</span>
                     </div>
 
-                    <h3 className="font-display text-2xl sm:text-4xl font-black text-white leading-tight">
+                    <FitText as="h3" text={CHAPTERS[activeChapter].headline} max={2.25} className="font-display text-2xl sm:text-4xl font-black text-white leading-tight">
                       {CHAPTERS[activeChapter].headline}
-                    </h3>
+                    </FitText>
 
                     <p className="font-sans text-base sm:text-lg text-neutral-300 leading-relaxed font-light">
                       {CHAPTERS[activeChapter].body}
@@ -333,7 +341,7 @@ export function WytherPage() {
 
               <div className="p-4 bg-black/60 border border-white/10 font-tech text-xs text-neutral-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <span className="text-[#FF2B2B] font-bold">» ARCHITECTURAL RESULT:</span>
-                <span>Sub-second page latency · 100% order capture · Automated fulfillment</span>
+                <span>Storefront · Admin platform · Payments · Content</span>
               </div>
             </div>
           </div>
@@ -400,7 +408,7 @@ export function WytherPage() {
           <div className="max-w-7xl mx-auto space-y-12">
             <div className="border border-white/15 bg-black/60 p-6 sm:p-8">
               <div className="font-tech text-xs text-[#8A8A84] mb-4 tracking-widest uppercase">
-                WYTHER COMPLETE TECHNOLOGY STACK:
+                WYTHHER COMPLETE TECHNOLOGY STACK:
               </div>
               <div className="flex flex-wrap gap-2">
                 {wytherProject.techStack.map((tech) => (

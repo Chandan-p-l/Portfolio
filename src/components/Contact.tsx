@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, Copy, Check, Mail, Github, Linkedin, Instagram, Send, Sparkles } from 'lucide-react';
 import { CHANDAN_INFO } from '../data/portfolioData';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
@@ -62,12 +63,12 @@ export function Contact() {
           <span className="font-editorial italic text-3xl sm:text-5xl block font-normal opacity-90">
             so...
           </span>
-          <h2 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[11.5rem] font-black uppercase tracking-tighter leading-[0.88]">
+          <FitText as="h2" text="BUILDING?" max={11.5} className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[11.5rem] font-black uppercase tracking-tighter leading-[0.88]">
             WHAT<br />
             ARE<br />
             WE<br />
             <span>BUILDING?</span>
-          </h2>
+          </FitText>
         </motion.div>
 
         {/* Minimal Dispatch Form & Direct Channels */}
@@ -78,11 +79,11 @@ export function Contact() {
               <div className="font-tech text-xs tracking-widest uppercase font-bold">
                 DIRECT INBOX LINK
               </div>
-              <h3 className="font-display font-black text-2xl sm:text-4xl uppercase tracking-tight">
+              <a href={`mailto:${CHANDAN_INFO.email}`} className="block font-tech font-bold text-xl sm:text-2xl lg:text-3xl tracking-tight break-all hover:text-[#FF2B2B] transition-colors">
                 {CHANDAN_INFO.email}
-              </h3>
+              </a>
               <p className="font-sans text-sm sm:text-base font-light leading-relaxed max-w-md opacity-80">
-                Open for technical leadership, co-founding ventures, high-concurrency systems, and creative technology collaborations.
+                Open to full-stack and frontend engineering roles, freelance product builds and technical collaborations.
               </p>
             </div>
 

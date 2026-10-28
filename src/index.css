@@ -202,3 +202,60 @@
   }
 }
 
+
+/* Long-form article typography (blog posts) */
+.prose { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; line-height: 1.8; color: #d4d2cc; font-weight: 300; }
+.prose > * + * { margin-top: 1.25rem; }
+.prose h2 { margin-top: 3.5rem; font-family: 'Syne', sans-serif; font-size: clamp(1.2rem, 5.6vw, 1.9rem); overflow-wrap: break-word; line-height: 1.15; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; color: #fff; scroll-margin-top: 6rem; }
+.prose h3 { margin-top: 2.25rem; font-family: 'Syne', sans-serif; font-size: clamp(1.05rem, 4.6vw, 1.3rem); overflow-wrap: break-word; font-weight: 700; color: #fff; scroll-margin-top: 6rem; }
+.prose h2, .prose h3 { position: relative; }
+.prose h2 .anchor, .prose h3 .anchor { position: absolute; left: -1.1em; color: #FF2B2B; opacity: 0; text-decoration: none; }
+.prose h2:hover .anchor, .prose h3:hover .anchor { opacity: 1; }
+.prose a { color: #fff; text-decoration: underline; text-decoration-color: #FF2B2B; text-underline-offset: 4px; }
+.prose a:hover { color: #FF2B2B; }
+.prose strong { color: #fff; font-weight: 600; }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose ul { list-style: square; }
+.prose ol { list-style: decimal; }
+.prose li + li { margin-top: .5rem; }
+.prose li::marker { color: #FF2B2B; }
+.prose blockquote { padding: 1.25rem 1.5rem; border-left: 3px solid #FF2B2B; background: #0E0E10; color: #fff; font-weight: 400; }
+.prose blockquote > * + * { margin-top: .6rem; }
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: .85em; padding: .15em .4em; background: rgba(255,43,43,.1); color: #ff8a80; }
+.prose pre { overflow-x: auto; padding: 1.25rem; background: #0A0A0A; border: 1px solid rgba(255,255,255,.12); font-size: .88rem; line-height: 1.65; }
+.prose pre code { padding: 0; background: none; color: #e8e6e0; font-size: inherit; }
+.prose hr { border: 0; border-top: 1px solid rgba(255,255,255,.1); margin-block: 2.5rem; }
+.prose .table-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,.12); }
+.prose table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.prose th, .prose td { padding: .75rem 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,.1); vertical-align: top; }
+.prose th { background: #0E0E10; color: #FF2B2B; font-family: 'JetBrains Mono', monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+.prose tr:last-child td { border-bottom: 0; }
+.prose input[type="checkbox"] { accent-color: #FF2B2B; margin-right: .5rem; }
+
+/* Hero code tiles: pop in, hold, fade — all on the compositor */
+@keyframes codeTile {
+  0% { opacity: 0; transform: scale(.1) rotate(-4deg); }
+  12% { opacity: 1; transform: scale(1) rotate(0); }
+  55% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(.4); }
+}
+.code-tile { animation: codeTile 1500ms cubic-bezier(.2,.8,.2,1) forwards; }
+
+/* Lanyard ID card idle float (CSS instead of a per-frame JS loop) */
+@keyframes idFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.id-float { animation: idFloat 4s ease-in-out infinite; }
+
+/* Lenis recommended base styles — avoids fighting native smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Overflow-proof display type (see src/utils/fit.ts) */
+.fit-box { container-type: inline-size; }
+.fit { display: block; font-size: min(var(--fit-max), calc(100cqi / var(--fit-em))); }
+
+@media (max-width: 767px) { .prose h2 .anchor, .prose h3 .anchor { display: none; } }
+/* A size container contributes no intrinsic width, so in a horizontal flex row let it take the free space. */
+.flex:not(.flex-col) > .fit-box,
+.flex:not(.flex-col) > :has(> .fit-box) { flex-grow: 1; min-width: min(100%, 18rem); }

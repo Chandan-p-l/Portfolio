@@ -12,13 +12,15 @@ export function PageTransition({ children }: PageTransitionProps) {
   // Determine current page label
   const getPageLabel = (pathname: string) => {
     if (pathname === '/' || pathname === '') return 'HOME';
-    if (pathname.includes('/work/wyther')) return 'WYTHER / CASE STUDY';
+    if (pathname.includes('/work/wythher')) return 'WYTHHER / CASE STUDY';
+    if (pathname.startsWith('/work/')) return 'CASE STUDY';
+    if (pathname.startsWith('/blog/')) return 'ARTICLE';
+    if (pathname.startsWith('/blog')) return 'BLOG';
     if (pathname.includes('/work')) return 'WORK';
     if (pathname.includes('/about')) return 'ABOUT';
     if (pathname.includes('/lab')) return 'LAB';
-    if (pathname.includes('/content')) return 'CONTENT';
     if (pathname.includes('/contact')) return 'CONTACT';
-    return pathname.replace('/', '').toUpperCase();
+    return 'NOT FOUND';
   };
 
   const label = getPageLabel(location.pathname);

@@ -4,6 +4,7 @@ import { Cpu, Terminal, Database, Server, GitBranch, Layout, Sparkles, Play, Ref
 import { TECH_STACK } from '../data/portfolioData';
 import { TechItem } from '../types';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 const CATEGORIES = ['ALL', 'FRONTEND', 'BACKEND', 'DATABASE', 'INFRASTRUCTURE', 'PRODUCT', 'EXPLORING'] as const;
 
@@ -44,12 +45,12 @@ export function TechLab() {
 
         {/* Giant Headline */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.95] text-white">
+          <FitText as="h2" text="THE STUFF I BREAK UNTIL IT WORKS." max={8} className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-[0.95] text-white">
             <span>THE STUFF</span><br />
             <span className="text-[#FF2A2A]">I BREAK</span><br />
             <span className="text-stroke-white hover:text-white transition-colors duration-300">UNTIL IT</span><br />
             <span>WORKS.</span>
-          </h2>
+          </FitText>
           <p className="font-sans text-neutral-400 text-base sm:text-lg mt-6 max-w-2xl">
             Hands-on command of the entire surface area: from browser DOM manipulation to Linux kernel parameters, database indexing, and design systems.
           </p>

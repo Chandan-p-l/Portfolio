@@ -1,0 +1,70 @@
+// Single source of truth for identity facts. SEO tags, JSON-LD, llms.txt,
+// the sitemap and the UI all read from here — change a fact once.
+export const SITE = {
+  url: 'https://portfolio-chandan10.vercel.app',
+  name: 'Chandan Pal',
+  shortTitle: 'Chandan Pal — Full-Stack Developer & CTO',
+  title: 'Chandan Pal — Full-Stack Developer, CTO & Co-founder of VagMed India',
+  description:
+    'Chandan Pal is a full-stack developer from Jaipur, India, and CTO & Co-founder of VagMed India Private Limited, the company behind WythHer. Chandan built wythher.com, vagmed.com, vedavarti.com and LOQmusic, and wrote the novel The Last Conversation.',
+  metaDescription:
+    'Chandan Pal is a full-stack developer from Jaipur, India and CTO & Co-founder of VagMed India (WythHer). Builder of wythher.com, LOQmusic and more.',
+  tagline: 'I build products people actually use — from idea to production.',
+  email: 'chandan2301@gmail.com',
+  birthDate: '2007-01-23',
+  birthDateDisplay: '23 January 2007',
+  jobTitle: 'CTO & Co-founder',
+  location: {
+    city: 'Jaipur',
+    region: 'Rajasthan',
+    country: 'India',
+    countryCode: 'IN',
+    lat: 26.9124,
+    lng: 75.7873,
+  },
+  company: {
+    name: 'VagMed India Private Limited',
+    shortName: 'VagMed India',
+    url: 'https://vagmed.com',
+    brand: 'WythHer',
+    brandUrl: 'https://wythher.com',
+  },
+  socials: {
+    github: 'https://github.com/Chandan-p-l',
+    linkedin: 'https://www.linkedin.com/in/chandan-pal-49b664205/',
+    instagram: 'https://www.instagram.com/chandan_pal101/',
+  },
+  book: {
+    title: 'The Last Conversation',
+    subtitle: 'A Psychological Drama Novel',
+    url: 'https://store.pothi.com/book/chandan-pal-the-last-conversation/',
+    pages: 113,
+    format: 'Paperback',
+    publisher: 'Pothi.com',
+    blurb:
+      'A heartfelt story about love, loss and memory — about the conversations that end too soon, the ones we wish we had finished, and the people we never forget.',
+  },
+  portrait: '/chandan-pal.webp',
+  ogImage: '/og/default.png',
+  locale: 'en_IN',
+  knowsAbout: [
+    'Full-stack web development',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Node.js',
+    'Supabase',
+    'Firebase',
+    'MySQL',
+    'Linux',
+    'Nginx',
+    'System design',
+    'E-commerce engineering',
+    'D2C technology',
+    'Technical SEO',
+    'Generative Engine Optimization',
+    'Product design',
+  ],
+} as const;
+
+export const absoluteUrl = (path = '/') => `${SITE.url}${path === '/' ? '' : path}`;

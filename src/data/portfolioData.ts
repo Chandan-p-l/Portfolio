@@ -1,188 +1,43 @@
-import { Project, TechItem, BuildStep, TechArticle } from '../types';
+import type { Project, TechItem, BuildStep, TechArticle } from '../types';
+
+import { SITE } from '../site';
+import { PROJECTS as WORK } from './work';
 
 export const CHANDAN_INFO = {
   name: 'CHANDAN PAL',
   role: 'DEVELOPER × CTO × PRODUCT BUILDER',
-  location: 'INDIA / 26.9124° N, 75.7873° E',
-  status: 'AVAILABLE FOR COLLABORATION',
-  email: 'chandanpal.dev@gmail.com',
-  github: 'https://github.com/thechandanpal',
-  linkedin: 'https://linkedin.com/in/thechandanpal',
-  instagram: 'https://instagram.com/thechandanpal',
-  youtube: 'https://youtube.com/@thechandanpal',
-  philosophy: 'I build things that shouldn\'t exist yet.',
+  location: `${SITE.location.city.toUpperCase()}, INDIA / ${SITE.location.lat}° N, ${SITE.location.lng}° E`,
+  status: 'OPEN TO ROLES & COLLABORATION',
+  email: SITE.email,
+  github: SITE.socials.github,
+  linkedin: SITE.socials.linkedin,
+  instagram: SITE.socials.instagram,
+  philosophy: 'I build products people actually use.',
   year: '2026',
 };
 
-export const PROJECTS: Project[] = [
-  {
-    id: 'wyther',
-    number: '01',
-    title: 'WYTHER',
-    subtitle: 'FLAGSHIP STARTUP CASE STUDY',
-    role: 'CTO & CO-FOUNDER',
-    year: '2025 - 2026',
-    category: 'FULL-STACK E-COMMERCE & BRAND PLATFORM',
-    tagline: 'A modern direct-to-consumer brand platform engineered from scratch for high conversion and velocity.',
-    summary: 'As CTO and Co-Founder, I took WythHer from raw whiteboards to a production e-commerce ecosystem. Designed the entire system architecture, coded the high-performance storefront, implemented resilient payment webhooks, custom inventory indexing, and automated logistics pipelines.',
-    problem: 'Standard off-the-shelf e-commerce templates are bloated, sluggish, and lack custom interactive brand storytelling necessary for high-tier conversion and custom bundle mechanics.',
-    solution: 'Engineered a bespoke architecture uniting ultra-fast client rendering with dedicated API gateways, decoupled headless database clusters, webhook-driven order fulfillment, and automated customer notifications.',
-    techStack: [
-      'React',
-      'JavaScript (ESNext)',
-      'Node.js',
-      'Express.js',
-      'Firebase',
-      'Supabase',
-      'MySQL',
-      'MongoDB',
-      'Tailwind CSS',
-      'Nginx',
-      'PM2',
-      'Git',
-      'Vercel',
-      'Netlify'
-    ],
-    features: [
-      'Performance-focused storefront and optimized asset pipeline',
-      'Payment gateway integration with idempotent webhook handling',
-      'Inventory synchronization designed for multi-channel endpoints',
-      'Automated dispatch tracking and customer delivery updates',
-      'Custom admin analytics dashboard'
-    ],
-    deliverables: [
-      'Frontend Storefront Architecture',
-      'Backend Microservices & REST API',
-      'Custom Database Schema & Migrations',
-      'Payment Gateway Integration & Reconciliation',
-      'Nginx Reverse Proxy & SSL Automation',
-      'Brand Identity System & UI Design Tokens'
-    ],
-    architecture: {
-      nodes: [
-        { name: 'CLIENT / BROWSER', type: 'Frontend', desc: 'React SPA with optimized bundle chunking, micro-interactions, and instant checkout drawer' },
-        { name: 'EDGE CDN / NGINX', type: 'Gateway', desc: 'Reverse proxy handling SSL termination, gzip/brotli compression, and rate limiting' },
-        { name: 'EXPRESS API CLUSTER', type: 'Backend', desc: 'Node.js runtime managed via PM2 with clustered CPU core utilization and error logging' },
-        { name: 'DATA TIER (SQL + NOSQL)', type: 'Database', desc: 'Relational data for orders/billing alongside document stores for product catalogs & session cache' },
-        { name: 'PAYMENT & LOGISTICS WEBHOOKS', type: 'Services', desc: 'Asynchronous event queues ensuring 100% order capture even during network blips' }
-      ]
-    },
-    metricsPlaceholder: 'LIVE PRODUCTION DEPLOYMENT',
-    proofStatus: 'Production work — a public walkthrough and outcome metrics should be added before sharing with recruiters.'
-  },
-  {
-    id: 'vedavarti',
-    number: '02',
-    title: 'VEDAVARTI',
-    subtitle: 'LUXURY FRAGRANCE VENTURE',
-    role: 'CO-CREATOR & TECH LEAD',
-    year: '2025',
-    category: 'PRODUCT DEVELOPMENT & DIGITAL EXPERIENCE',
-    tagline: 'An artisanal fragrance experiment exploring olfactive notes, luxury tactile packaging, and high-editorial digital storefront design.',
-    summary: 'A multidisciplinary product venture combining tangible fragrance formulation with digital luxury storytelling. Spearheaded the digital aesthetic, 3D product showcase visuals, packaging typography, and direct-to-consumer digital commerce pipeline.',
-    problem: 'Fragrance is inherently invisible and sensory. Selling artisanal perfumes online requires an evocative, non-generic digital environment that conveys mood, fragrance pyramids, and tactile luxury.',
-    solution: 'Designed an editorial web experience incorporating mood-based olfactory notes breakdown (Top, Heart, Base), ambient audio visualizers, and minimal friction single-page ordering.',
-    techStack: ['React', 'Tailwind CSS', 'Figma', 'Node.js', 'Stripe / Razorpay', 'Motion'],
-    features: [
-      'Interactive olfactory pyramid breakdown (Top, Heart, Base notes)',
-      'Editorial high-contrast magazine layout with bespoke typography',
-      'Minimal cart drawer with instant payment checkout flow',
-      'Custom packaging design guidelines and tactile foil print specs'
-    ],
-    deliverables: [
-      'Digital Storefront & Scent Visualizer',
-      'Fragrance Packaging & Bottle Mockup Specs',
-      'Brand Typography & Tone of Voice System',
-      'E-commerce Inventory & Fulfillment Pipeline'
-    ],
-    metricsPlaceholder: 'PILOT BATCH LAUNCH',
-    proofStatus: 'Pilot venture — case-study material is currently limited to this project summary.'
-  },
-  {
-    id: 'canezz',
-    number: '03',
-    title: 'CANeZZ',
-    subtitle: 'HARDWARE / SMART LIFESTYLE VENTURE',
-    role: 'PRODUCT & TECH STRATEGIST',
-    year: '2025',
-    category: 'EXPERIMENTAL MOBILITY & ACCESSORY CONCEPT',
-    tagline: 'Exploring the intersection of physical assistive hardware and smart digital companion software.',
-    summary: 'An ambitious startup concept focused on ergonomic support, modular hardware attachments, and companion software. Iterated through rapid prototyping, customer interviews, and functional industrial sketches.',
-    problem: 'Traditional assistive and mobility accessories look clinical, stigmatizing, and lack modern ergonomic modularity and connected safety features.',
-    solution: 'Created an urban, sleek mobility accessory concept featuring modular snap-on toolheads, emergency LED beacons, and digital SOS pairing.',
-    techStack: ['Product Prototyping', 'UI/UX Design', 'Figma', 'Embedded Systems Research', 'Concept Modeling'],
-    features: [
-      'Modular snap-fit accessory attachment system',
-      'Integrated low-power emergency beacon concept',
-      'Companion smartphone pairing interface wireframes',
-      'Ergonomic grip pressure distribution analysis'
-    ],
-    deliverables: [
-      'Product Concept Whitepaper & Teardown',
-      'CAD / Blueprint Aesthetic Renders',
-      'Companion App UI Architecture',
-      'Early User Feedback & Feasibility Report'
-    ],
-    metricsPlaceholder: 'CONCEPT PROTOTYPE',
-    proofStatus: 'Clearly labelled concept — not presented as a shipped software product.'
-  },
-  {
-    id: 'indicall',
-    number: '04',
-    title: 'INDICALL',
-    subtitle: 'RAPID SOS & MESH CONCEPT',
-    role: 'SYSTEM ARCHITECT & DESIGNER',
-    year: '2024 - 2025',
-    category: 'EMERGENCY TELEMETRY & RAPID ALERT PROTOCOL',
-    tagline: 'Zero-latency emergency dispatch protocol designed for high-stress situations with offline mesh fallback.',
-    summary: 'A critical-response emergency system designed to transmit compressed telemetry (GPS coordinates, audio snapshot, battery level) in less than 200ms across congested cellular networks with localized peer mesh routing.',
-    problem: 'During high-stress emergencies or crowded low-reception zones, calling 112 or conventional phone dialers suffers from high latency, dropped calls, and slow location sharing.',
-    solution: 'Architected a 1-tap distress broadcast protocol that compresses telemetry into SMS/data packets and broadcasts localized Bluetooth beacons for nearby helper discovery.',
-    techStack: ['JavaScript', 'Geolocation API', 'WebSockets', 'Node.js', 'Service Workers', 'PWA'],
-    features: [
-      'Instant 1-tap activation with countdown abort safeguard',
-      'Micro-packet compression sending coordinates in <140 bytes',
-      'Automatic audio snippet capture and background cloud dispatch',
-      'Battery-saver black screen mode with persistent location ping'
-    ],
-    deliverables: [
-      'SOS Dispatch Engine Architecture',
-      'Emergency Contact Live Tracking Web Portal',
-      'Low-bandwidth JSON Telemetry Protocol',
-      'High-contrast emergency UI for stressed users'
-    ],
-    metricsPlaceholder: 'PROTOCOL SPECIFICATION',
-    proofStatus: 'Clearly labelled system concept — technical validation and field-test evidence are not yet published.'
-  },
-  {
-    id: 'experiments',
-    number: '05',
-    title: 'EXPERIMENTS & LABS',
-    subtitle: 'CREATIVE TECH & CODE EXPLORATIONS',
-    role: 'CREATIVE TECHNOLOGIST',
-    year: '2024 - 2026',
-    category: 'ALGORITHMS, SHADERS & MICRO-TOOLS',
-    tagline: 'Where I break things, benchmark esoteric ideas, and play with bleeding-edge web technology.',
-    summary: 'A sandbox of creative coding experiments: custom audio synthesizers using Web Audio API, Canvas physics engines, bespoke CSS layout systems, GLSL shaders, and experimental UI interaction patterns.',
-    problem: 'Standard software development often gets constrained by convention. Experiments allow exploring uncharted interaction models.',
-    solution: 'Built a curated repository of micro-tools, algorithmic generators, and interactive visual toys that push the limits of modern browsers.',
-    techStack: ['TypeScript', 'Canvas API', 'Web Audio API', 'GSAP', 'CSS Grid Hacks', 'SVG Manipulation'],
-    features: [
-      'Procedural grain & vector distortion filters',
-      'Synthesized sound effects generated purely via math',
-      'Custom layout physics engine for draggable editorial items',
-      'Kinetic typography experiments reacting to cursor velocity'
-    ],
-    deliverables: [
-      'Interactive Canvas Playgrounds',
-      'Open-source Micro Utilities',
-      'Kinetic Typography Demos',
-      'Experimental UI Components'
-    ],
-    metricsPlaceholder: 'CONTINUOUS R&D',
-    proofStatus: 'Experiment collection — individual public demos and source links should be added as they are released.'
-  }
-];
+// The cinematic UI reads this shape; the content itself lives in ./work.ts.
+export const PROJECTS: Project[] = WORK.map((w, i) => ({
+  id: w.slug,
+  number: String(i + 1).padStart(2, '0'),
+  title: w.name.toUpperCase(),
+  subtitle: w.category.toUpperCase(),
+  role: w.role.toUpperCase(),
+  year: w.period.toUpperCase(),
+  category: w.category.toUpperCase(),
+  kind: w.kind,
+  tagline: w.oneLiner,
+  summary: w.summary,
+  problem: w.story[0],
+  solution: w.story.slice(1).join(' '),
+  techStack: w.stack,
+  features: w.highlights,
+  deliverables: w.highlights,
+  accentColor: w.accent,
+  metricsPlaceholder: w.kind === 'Book' ? 'PUBLISHED' : 'LIVE IN PRODUCTION',
+  proofStatus: w.kind === 'Book' ? `Available on ${SITE.book.publisher}.` : `Live at ${w.urlLabel}.`,
+  liveUrl: w.url,
+}));
 
 export const TECH_STACK: TechItem[] = [
   // FRONTEND
@@ -563,16 +418,16 @@ export const CREATIVE_GALLERY = [
 
 export const LIVE_TELEMETRY = {
   activeProjects: [
-    { name: 'WYTHER', role: 'CTO & CO-FOUNDER', status: 'ACTIVE', progress: 95, badge: 'PRODUCTION' },
-    { name: 'SYSTEM ARCH LABS', role: 'RESEARCHER', status: 'EXPLORING', progress: 60, badge: 'EXPERIMENT' },
-    { name: 'TECH CONTENT', role: 'CREATOR', status: 'STARTING', progress: 40, badge: 'COMMUNITY' },
+    { name: 'WYTHHER', role: 'CTO & CO-FOUNDER', status: 'ACTIVE', progress: 95, badge: 'PRODUCTION' },
+    { name: 'LOQMUSIC', role: 'SOLO DEVELOPER', status: 'LIVE', progress: 85, badge: 'WEB APP' },
+    { name: 'TECH BLOG', role: 'WRITER', status: 'PUBLISHING', progress: 60, badge: 'CONTENT' },
     { name: 'NEW CONCEPTS', role: 'PRODUCT ARCHITECT', status: 'CLASSIFIED', progress: 25, badge: 'STEALTH' }
   ],
   systemStats: {
-    uptime: '99.98%',
-    activeNodes: '12 CLUSTERS',
+    uptime: 'LIVE',
+    activeNodes: '4 PRODUCTS',
     lastUpdated: '2026',
-    coreEngine: 'REACT 19 + GSAP + LENIS',
+    coreEngine: 'REACT 19 + MOTION + LENIS',
     coordinates: '26.9124° N, 75.7873° E'
   }
 };

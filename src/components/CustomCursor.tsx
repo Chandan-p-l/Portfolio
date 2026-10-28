@@ -106,7 +106,7 @@ export function CustomCursor({ cursorText = '', cursorVariant = 'default' }: Cus
           displayText
             ? 'bg-gradient-to-br from-[#FF2B2B] via-red-600 to-white text-black font-extrabold text-[10px] tracking-wider leading-tight shadow-[0_0_25px_rgba(255,43,43,0.6)] border-2 border-white'
             : isHovered
-            ? 'bg-white/20 border-2 border-[#FF2B2B] backdrop-blur-[2px] shadow-[0_0_15px_rgba(255,43,43,0.4)]'
+            ? 'bg-white/20 border-2 border-[#FF2B2B] shadow-[0_0_15px_rgba(255,43,43,0.4)]'
             : 'border-2 border-white/80 bg-black/40 shadow-[0_0_12px_rgba(255,43,43,0.3)]'
         }`}
         style={{

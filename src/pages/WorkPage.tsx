@@ -8,22 +8,21 @@ import { ProjectModal } from '../components/ProjectModal';
 import { PROJECTS } from '../data/portfolioData';
 import { Project } from '../types';
 import { sound } from '../utils/sound';
+import { FitText } from '../components/FitText';
 
-const CATEGORIES = ['ALL', 'E-COMMERCE', 'SENSORY & LUXURY', 'SYSTEMS & OS', 'HARDWARE & IOT'];
+const CATEGORIES = ['ALL', 'STARTUPS', 'WEBSITES & APPS', 'BOOK'];
 
 export function WorkPage() {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('ALL');
-  const [hoveredProjectId, setHoveredProjectId] = useState<string>('wyther');
+  const [hoveredProjectId, setHoveredProjectId] = useState<string>('wythher');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isExpanding, setIsExpanding] = useState(false);
 
   const filteredProjects = PROJECTS.filter((p) => {
-    if (activeCategory === 'ALL') return true;
-    if (activeCategory === 'E-COMMERCE') return p.category.includes('Commerce') || p.category.includes('D2C');
-    if (activeCategory === 'SENSORY & LUXURY') return p.category.includes('Perfume') || p.category.includes('Luxury');
-    if (activeCategory === 'SYSTEMS & OS') return p.category.includes('Emergency') || p.category.includes('OS');
-    if (activeCategory === 'HARDWARE & IOT') return p.category.includes('Smart') || p.category.includes('Mobility') || p.category.includes('IoT');
+    if (activeCategory === 'STARTUPS') return p.kind === 'Startup';
+    if (activeCategory === 'WEBSITES & APPS') return p.kind === 'Website' || p.kind === 'Web app';
+    if (activeCategory === 'BOOK') return p.kind === 'Book';
     return true;
   });
 
@@ -31,10 +30,10 @@ export function WorkPage() {
 
   const handleProjectClick = (project: Project) => {
     sound.playClick();
-    if (project.id === 'wyther') {
+    if (project.id === 'wythher') {
       setIsExpanding(true);
       setTimeout(() => {
-        navigate('/work/wyther');
+        navigate('/work/wythher');
       }, 350);
     } else {
       setSelectedProject(project);
@@ -54,7 +53,7 @@ export function WorkPage() {
               className="fixed inset-0 z-[9995] bg-[#FF2B2B] flex items-center justify-center pointer-events-none"
             >
               <div className="font-display font-black text-6xl sm:text-8xl text-black uppercase tracking-tight">
-                WYTHER
+                WYTHHER
               </div>
             </motion.div>
           )}
@@ -68,22 +67,22 @@ export function WorkPage() {
                 <span className="text-[#FF2B2B] font-bold">02 // VENTURES ARCHIVE</span>
                 <span className="text-white">SELECTED WORK</span>
               </div>
-              <span className="text-emerald-400 font-bold">{PROJECTS.length} PROJECTS & CONCEPTS</span>
+              <span className="text-emerald-400 font-bold">{PROJECTS.length} SHIPPED PROJECTS</span>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
+            <FitText as="h1" text="PROJECTS & VENTURES." max={8} className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white mb-6">
               PROJECTS &<br />
               <span className="text-[#FF2B2B]">VENTURES.</span>
-            </h1>
+            </FitText>
 
             <p className="font-sans text-xl sm:text-2xl text-neutral-300 font-light max-w-3xl leading-relaxed">
-              A transparent archive of shipped ventures, pilot work, and clearly labelled product concepts.
+              Startups I help run, websites and apps I've designed and built — and one novel.
             </p>
           </div>
         </section>
 
         {/* Category Filters */}
-        <section className="py-6 px-4 sm:px-8 md:px-12 border-b border-white/10 bg-[#080808] sticky top-16 z-30 backdrop-blur-md">
+        <section className="py-6 px-4 sm:px-8 md:px-12 border-b border-white/10 bg-[#080808] sticky top-16 z-30">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
             <div className="flex items-center gap-2">
               <Filter className="w-3.5 h-3.5 text-[#FF2B2B]" />
@@ -138,7 +137,7 @@ export function WorkPage() {
                       }`}
                     >
                       <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-2">
+                        <div className="space-y-2 flex-1 min-w-0">
                           <div className="flex items-center gap-3 font-tech text-xs">
                             <span
                               className={`font-bold transition-colors ${
@@ -149,20 +148,21 @@ export function WorkPage() {
                             </span>
                             <span className="text-neutral-600">/</span>
                             <span className="text-neutral-400">{project.year}</span>
-                            {project.id === 'wyther' && (
+                            {project.id === 'wythher' && (
                               <span className="px-2 py-0.5 bg-[#FF2B2B]/20 text-[#FF2B2B] border border-[#FF2B2B]/40 text-[10px] font-bold">
                                 FLAGSHIP
                               </span>
                             )}
                           </div>
 
-                          <h2
-                            className={`font-display text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight transition-colors duration-200 ${
+                          <FitText as="h2" text={project.title} max={3.75} className={`font-display text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight transition-colors duration-200 ${
                               isHovered ? 'text-[#FF2B2B]' : 'text-white'
-                            }`}
-                          >
-                            {project.title}
-                          </h2>
+                            }`}>
+                            {/* Real link for crawlers; the row's click handler drives the UI. */}
+                            <Link to={`/work/${project.id}`} onClick={(e) => e.preventDefault()}>
+                              {project.title}
+                            </Link>
+                          </FitText>
 
                           <div className="font-future text-xs text-neutral-400">
                             {project.category}
@@ -233,9 +233,9 @@ export function WorkPage() {
 
                       {/* Graphic Composition for the Active Project */}
                       <div className="py-4 space-y-3">
-                        <div className="font-display font-black text-4xl text-white tracking-tight">
+                        <FitText as="div" text={activeProject.title} max={2.25} className="font-display font-black text-4xl text-white tracking-tight">
                           {activeProject.title}
-                        </div>
+                        </FitText>
 
                         <p className="font-editorial italic text-base text-neutral-300">
                           "{activeProject.tagline}"
@@ -256,7 +256,7 @@ export function WorkPage() {
                       {/* Click prompt */}
                       <div className="font-tech text-xs text-white flex items-center justify-between border-t border-white/10 pt-3">
                         <span className="text-[#FF2B2B] font-bold">
-                          {activeProject.id === 'wyther' ? 'CLICK FOR CASE STUDY' : 'CLICK TO INSPECT SPECS'}
+                          {activeProject.id === 'wythher' ? 'CLICK FOR CASE STUDY' : 'CLICK TO INSPECT SPECS'}
                         </span>
                         <ArrowRight className="w-4 h-4 text-[#FF2B2B]" />
                       </div>

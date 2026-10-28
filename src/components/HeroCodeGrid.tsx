@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion } from 'motion/react';
 import { sound } from '../utils/sound';
 
 // Combined master library of snippets, binary data, tech stack, and syntax symbols
@@ -33,37 +32,26 @@ export function HeroCodeGrid() {
   const TILE_SIZE = 54; // Grid tile block size in px
   const MAX_TILES = 24; // Max active tiles at any time to preserve 60-120fps performance
 
-  // RAF loop to decay expired tiles (only runs when activeTiles is not empty)
-  useEffect(() => {
-    if (activeTiles.size === 0) return;
-
-    let animFrame: number;
-    const updateTiles = () => {
-      const now = Date.now();
+  // Tiles fade out with a CSS animation; React only re-renders when tiles are added or removed.
+  const timersRef = useRef<number[]>([]);
+  const scheduleRemoval = useCallback((keys: string[], createdAt: number, after: number) => {
+    const t = window.setTimeout(() => {
       setActiveTiles((prev: Map<string, TileData>) => {
         let changed = false;
         const next = new Map<string, TileData>(prev);
-        for (const [key, tile] of next.entries()) {
-          const elapsed = now - tile.createdAt;
-          if (elapsed > tile.life) {
-            next.delete(key);
+        for (const k of keys) {
+          if (next.get(k)?.createdAt === createdAt) {
+            next.delete(k);
             changed = true;
-          } else {
-            const remaining = 1 - elapsed / tile.life;
-            if (Math.abs(tile.opacity - remaining) > 0.08) {
-              next.set(key, { ...tile, opacity: remaining });
-              changed = true;
-            }
           }
         }
         return changed ? next : prev;
       });
-      animFrame = requestAnimationFrame(updateTiles);
-    };
+    }, after);
+    timersRef.current.push(t);
+  }, []);
 
-    animFrame = requestAnimationFrame(updateTiles);
-    return () => cancelAnimationFrame(animFrame);
-  }, [activeTiles.size]);
+  useEffect(() => () => timersRef.current.forEach(clearTimeout), []);
 
   // Spawn tile cluster at column & row
   const spawnTileCluster = useCallback((targetCol: number, targetRow: number, count = 5) => {
@@ -74,6 +62,7 @@ export function HeroCodeGrid() {
 
     const shuffled = [...offsets].sort(() => Math.random() - 0.5).slice(0, count);
     const now = Date.now();
+    scheduleRemoval(shuffled.map(([dc, dr]) => `${targetCol + dc}_${targetRow + dr}`), now, 1900);
 
     setActiveTiles((prev: Map<string, TileData>) => {
       const next = new Map<string, TileData>(prev);
@@ -109,7 +98,7 @@ export function HeroCodeGrid() {
 
       return next;
     });
-  }, []);
+  }, [scheduleRemoval]);
 
   // Spawn radial burst pattern
   const triggerBurst = useCallback((centerCol: number, centerRow: number) => {
@@ -126,6 +115,7 @@ export function HeroCodeGrid() {
     }
 
     const now = Date.now();
+    scheduleRemoval(burstOffsets.map(([dc, dr]) => `${centerCol + dc}_${centerRow + dr}`), now, 1800);
     setActiveTiles((prev: Map<string, TileData>) => {
       const next = new Map<string, TileData>(prev);
       burstOffsets.forEach(([dc, dr]) => {
@@ -144,21 +134,30 @@ export function HeroCodeGrid() {
           row,
           code: randomSymbol,
           opacity: 1,
-          createdAt: now + delay,
-          life: 1500,
+          createdAt: now,
+          life: 1500 + delay,
           accentType
         });
       });
 
       return next;
     });
-  }, []);
+  }, [scheduleRemoval]);
 
   // Global window listeners for mouse move and click over the Hero container rect
   useEffect(() => {
+    let frame = 0;
+    let lastEvent: MouseEvent | null = null;
     const handleWindowMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
+      lastEvent = e;
+      if (!frame) frame = requestAnimationFrame(processMove);
+    };
+    const processMove = () => {
+      frame = 0;
+      const e = lastEvent;
+      if (!e || !containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
+      if (rect.bottom < 0) return;
 
       if (
         e.clientX >= rect.left &&
@@ -202,6 +201,7 @@ export function HeroCodeGrid() {
     window.addEventListener('click', handleWindowClick, { passive: true });
 
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener('mousemove', handleWindowMouseMove);
       window.removeEventListener('click', handleWindowClick);
     };
@@ -220,18 +220,16 @@ export function HeroCodeGrid() {
         const top = tile.row * TILE_SIZE;
 
         return (
-          <motion.div
-            key={tile.id}
-            initial={{ scale: 0.1, opacity: 0, rotate: -4 }}
-            animate={{ scale: tile.opacity, opacity: tile.opacity, rotate: 0 }}
-            transition={{ type: 'spring', damping: 22, stiffness: 320 }}
+          <div
+            key={`${tile.id}-${tile.createdAt}`}
             style={{
+              animationDuration: `${tile.life}ms`,
               left: `${left}px`,
               top: `${top}px`,
               width: `${TILE_SIZE - 2}px`,
               height: `${TILE_SIZE - 2}px`,
             }}
-            className={`absolute flex items-center justify-center p-1 font-tech font-bold text-xs rounded-[2px] transition-colors pointer-events-none will-change-transform ${
+            className={`absolute flex items-center justify-center p-1 font-tech font-bold text-xs rounded-[2px] pointer-events-none code-tile ${
               tile.accentType === 'white'
                 ? 'bg-[#FF2B2B] text-black font-black border-2 border-black shadow-[0_0_18px_rgba(255,43,43,0.7)] z-30'
                 : tile.accentType === 'red'
@@ -245,7 +243,7 @@ export function HeroCodeGrid() {
 
             {/* Corner technical indicator dot in Red */}
             <span className="absolute top-0.5 right-0.5 w-1 h-1 bg-[#FF2B2B] rounded-full shadow-[0_0_4px_#FF2B2B]" />
-          </motion.div>
+          </div>
         );
       })}
     </div>

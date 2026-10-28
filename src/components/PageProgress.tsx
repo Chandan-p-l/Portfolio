@@ -5,7 +5,7 @@ const SECTIONS = [
   { id: 'top', label: '01', name: 'HERO' },
   { id: 'who-am-i', label: '02', name: 'WHO' },
   { id: 'identity', label: '03', name: 'ROLE' },
-  { id: 'wyther-flagship', label: '04', name: 'WYTHER' },
+  { id: 'wyther-flagship', label: '04', name: 'WYTHHER' },
   { id: 'projects', label: '05', name: 'WORK' },
   { id: 'tech-lab', label: '06', name: 'STACK' },
   { id: 'behind-screen', label: '07', name: 'SYSTEM' },

@@ -1,34 +1,42 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Lenis from 'lenis';
 import { CustomCursor } from './components/CustomCursor';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Navigation } from './components/Navigation';
 import { ScrollToTop } from './components/ScrollToTop';
+import { SeoManager } from './components/SeoManager';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { WorkPage } from './pages/WorkPage';
 import { WytherPage } from './pages/WytherPage';
+import { ProjectPage } from './pages/ProjectPage';
 import { LabPage } from './pages/LabPage';
-import { ContentPage } from './pages/ContentPage';
+import { BlogPage } from './pages/BlogPage';
+import { PostPage } from './pages/PostPage';
 import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 function AnimatedRoutes() {
   const location = useLocation();
 
+  // initial={false}: the prerendered first paint shows content immediately;
+  // the red curtain only plays on in-app navigation.
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <Routes location={location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/work" element={<WorkPage />} />
-        <Route path="/work/wyther" element={<WytherPage />} />
+        <Route path="/work/wythher" element={<WytherPage />} />
+        <Route path="/work/:slug" element={<ProjectPage />} />
         <Route path="/lab" element={<LabPage />} />
-        <Route path="/content" element={<ContentPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<PostPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
   );
@@ -42,13 +50,13 @@ export default function App() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // lerp-based smoothing follows the wheel closely, so scrolling feels fluid rather than floaty.
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.14,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 1,
     });
     (window as any).lenis = lenis;
 
@@ -68,26 +76,25 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-[#050505] text-[#F4F2EC] relative selection:bg-[#FF2B2B] selection:text-white grain-overlay">
-        {/* Loading Sequence */}
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+    <div className="min-h-screen bg-[#050505] text-[#F4F2EC] relative selection:bg-[#FF2B2B] selection:text-white grain-overlay">
+      <SeoManager />
 
-        {/* Custom Mouse Cursor */}
-        <CustomCursor />
+      {/* Loading Sequence */}
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
 
-        {/* Navigation Bar */}
-        <Navigation />
+      {/* Custom Mouse Cursor */}
+      <CustomCursor />
 
-        {/* Auto Scroll To Top on Route Transition */}
-        <ScrollToTop />
+      {/* Navigation Bar */}
+      <Navigation />
 
-        {/* Main Routed Content */}
-        <main id="main-content" className="relative z-10">
-          <AnimatedRoutes />
-        </main>
-      </div>
-    </Router>
+      {/* Auto Scroll To Top on Route Transition */}
+      <ScrollToTop />
+
+      {/* Main Routed Content */}
+      <main id="main-content" className="relative z-10">
+        <AnimatedRoutes />
+      </main>
+    </div>
   );
 }
-

@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { label: 'WORK', path: '/work' },
   { label: 'ABOUT', path: '/about' },
   { label: 'LAB', path: '/lab' },
-  { label: 'CONTENT', path: '/content' },
+  { label: 'BLOG', path: '/blog' },
   { label: 'CONTACT', path: '/contact' },
 ];
 
@@ -79,8 +79,8 @@ export function Navigation(_props: NavigationProps = {}) {
         <div
           className={`max-w-7xl mx-auto flex items-center justify-between pointer-events-auto transition-all duration-300 rounded-full ${
             isScrolled
-              ? 'bg-[#050505]/95 backdrop-blur-md border border-white/15 px-6 py-2.5 shadow-2xl'
-              : 'bg-[#050505]/85 backdrop-blur-md border border-white/10 px-6 py-2.5 shadow-xl'
+              ? 'bg-[#050505]/97 border border-white/15 px-6 py-2.5 shadow-2xl'
+              : 'bg-[#050505]/92 border border-white/10 px-6 py-2.5 shadow-xl'
           }`}
         >
           {/* Top Left: CP® Brand Identity */}
@@ -98,7 +98,7 @@ export function Navigation(_props: NavigationProps = {}) {
           </div>
 
           {/* Center Minimal Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-tech text-[11px] tracking-widest uppercase">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-8 font-tech text-[11px] tracking-widest uppercase">
             {NAV_LINKS.map((link) => {
               const active = isCurrentPath(link.path);
               return (
@@ -135,10 +135,10 @@ export function Navigation(_props: NavigationProps = {}) {
                 className="flex items-center gap-2 px-2.5 py-1 bg-black/60 border border-white/10 hover:border-[#FF2B2B] text-[10px] font-tech text-white transition-colors"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF2B2B] animate-ping" />
-                <span className="hidden sm:inline tracking-wider text-neutral-300">
+                <span className="hidden lg:inline tracking-wider text-neutral-300">
                   ● AVAILABLE / BUILDING
                 </span>
-                <span className="sm:hidden text-[#FF2B2B]">● LIVE</span>
+                <span className="lg:hidden text-[#FF2B2B]">● LIVE</span>
               </button>
 
               {/* Status Easter Egg Toast */}
@@ -178,10 +178,10 @@ export function Navigation(_props: NavigationProps = {}) {
                 value={isMuted ? 0 : volumeLevel}
                 onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
                 data-cursor-text="VOL"
-                className="w-14 sm:w-20 h-1.5 accent-[#FF2B2B] bg-neutral-800 rounded-lg cursor-pointer transition-all"
+                className="w-12 lg:w-20 h-1.5 accent-[#FF2B2B] bg-neutral-800 rounded-lg cursor-pointer transition-all"
               />
 
-              <span className="hidden sm:inline font-extrabold text-[9px] text-[#FF2B2B] w-7 text-right select-none">
+              <span className="hidden xl:inline font-extrabold text-[9px] text-[#FF2B2B] w-7 text-right select-none">
                 {isMuted || volumeLevel === 0 ? '0%' : `${Math.round(volumeLevel * 100)}%`}
               </span>
             </div>

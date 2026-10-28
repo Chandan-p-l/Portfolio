@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Sparkles, Terminal, Layers, Compass, ShieldCheck, ArrowDown } from 'lucide-react';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 const ROLES = [
   {
@@ -106,9 +107,9 @@ export function IdentityEvolution() {
                 <div className="font-tech text-[10px] opacity-75 mb-1">
                   0{idx + 1} // {role.timeline}
                 </div>
-                <div className="font-display font-black text-sm sm:text-base md:text-lg tracking-wider">
+                <FitText as="div" text={role.title} max={1.125} tracking={0.05} className="font-display font-black text-sm sm:text-base md:text-lg tracking-wider">
                   {role.title}
-                </div>
+                </FitText>
               </button>
             );
           })}
@@ -136,9 +137,9 @@ export function IdentityEvolution() {
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.25 }}
               >
-                <h3 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-black tracking-tighter leading-none text-white uppercase mb-6">
+                <FitText as="h3" text={activeRole.title} max={10.5} className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-black tracking-tighter leading-none text-white uppercase mb-6">
                   {activeRole.title}
-                </h3>
+                </FitText>
 
                 <div className="font-future text-sm sm:text-lg md:text-xl text-[#FF2B2B] tracking-wider mb-8">
                   — {activeRole.tagline}
@@ -200,7 +201,7 @@ export function IdentityEvolution() {
             data-cursor-text="CASE STUDY"
             className="flex items-center gap-3 px-5 py-3 bg-[#FF2B2B] text-white hover:bg-white hover:text-black font-tech text-xs tracking-widest uppercase font-bold transition-all shadow-xl"
           >
-            <span>ENTER WYTHER FLAGSHIP</span>
+            <span>ENTER WYTHHER FLAGSHIP</span>
             <ArrowDown className="w-4 h-4" />
           </button>
         </div>

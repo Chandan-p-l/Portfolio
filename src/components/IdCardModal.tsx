@@ -88,7 +88,7 @@ export function IdCardModal({ isOpen, onClose }: IdCardModalProps) {
               <div className="md:col-span-4 flex flex-col items-center">
                 <div className="relative aspect-[3.5/4.5] w-56 sm:w-64 overflow-hidden rounded-lg bg-black border-2 border-[#FF2B2B] shadow-2xl shadow-red-500/30 group">
                   <img
-                    src="/hero-portrait.png"
+                    src="/chandan-pal.webp"
                     alt="Chandan Pal Official ID"
                     className="w-full h-full object-cover object-top scale-105 grayscale contrast-125"
                   />
@@ -108,7 +108,7 @@ export function IdCardModal({ isOpen, onClose }: IdCardModalProps) {
                 <div>
                   <div className="font-tech text-xs text-[#FF2B2B] font-extrabold tracking-widest uppercase mb-1 flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-[#FF2B2B]" />
-                    INDEPENDENT DEVELOPER & CTO
+                    FULL-STACK DEVELOPER · CTO & CO-FOUNDER
                   </div>
                   <h2 className="font-display text-4xl sm:text-6xl font-black uppercase text-white tracking-tight">
                     CHANDAN PAL
@@ -142,7 +142,7 @@ export function IdCardModal({ isOpen, onClose }: IdCardModalProps) {
                   <div className="bg-white/5 border border-white/10 p-3 rounded">
                     <span className="text-neutral-400 block text-[10px] uppercase font-semibold">CURRENT ROLE</span>
                     <span className="text-white font-bold text-xs sm:text-sm text-amber-300 mt-0.5 block">
-                      CTO @ WythHer
+                      CTO & CO-FOUNDER, VAGMED INDIA
                     </span>
                   </div>
                 </div>
@@ -157,10 +157,10 @@ export function IdCardModal({ isOpen, onClose }: IdCardModalProps) {
                   DEVELOPMENT DISCIPLINE
                 </div>
                 <p className="font-sans text-sm text-neutral-300 leading-relaxed">
-                  Specializing in reactive frontend UI systems, ultra-fast canvas/GSAP micro-interactions, TypeScript API microservices, database indexing, and cloud VPS deployments.
+                  Full-stack product building: React and Next.js frontends, Node.js and PHP backends, Supabase, Firebase and MySQL data, payments, deployment and technical SEO.
                 </p>
                 <div className="pt-2 flex flex-wrap gap-1.5 font-tech text-[10px]">
-                  {['React 19', 'TypeScript', 'Vite', 'Node.js', 'Python', 'Docker', 'PostgreSQL', 'Tailwind v4'].map((t) => (
+                  {['React', 'Next.js', 'TypeScript', 'Node.js', 'Supabase', 'Firebase', 'MySQL', 'Tailwind CSS'].map((t) => (
                     <span key={t} className="bg-neutral-900 border border-white/15 px-2.5 py-1 text-white font-bold">
                       {t}
                     </span>
@@ -174,18 +174,17 @@ export function IdCardModal({ isOpen, onClose }: IdCardModalProps) {
                   ACTIVE VENTURES & PROJECTS
                 </div>
                 <ul className="space-y-2 font-tech text-xs text-neutral-300">
-                  <li className="flex items-center justify-between border-b border-white/10 pb-1.5">
-                    <span className="font-bold text-white">Wyther Startup</span>
-                    <span className="text-[#FF2B2B]">CO-FOUNDER & CTO</span>
-                  </li>
-                  <li className="flex items-center justify-between border-b border-white/10 pb-1.5">
-                    <span className="font-bold text-white">Vedavarti Fragrance</span>
-                    <span className="text-neutral-400">SYSTEM ARCHITECT</span>
-                  </li>
-                  <li className="flex items-center justify-between">
-                    <span className="font-bold text-white">Independent Portfolio</span>
-                    <span className="text-emerald-400">2026 RELEASE</span>
-                  </li>
+                  {[
+                    ['VagMed India / WythHer', 'CTO & CO-FOUNDER', 'text-[#FF2B2B]'],
+                    ['LOQmusic', 'SOLO DEVELOPER', 'text-neutral-400'],
+                    ['VedaVarti', 'DESIGN & DEVELOPMENT', 'text-neutral-400'],
+                    ['The Last Conversation', 'AUTHOR', 'text-emerald-400'],
+                  ].map(([name, role, color], i, all) => (
+                    <li key={name} className={`flex items-center justify-between gap-3 ${i < all.length - 1 ? 'border-b border-white/10 pb-1.5' : ''}`}>
+                      <span className="font-bold text-white">{name}</span>
+                      <span className={`${color} text-right`}>{role}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

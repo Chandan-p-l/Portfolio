@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Terminal, Volume2, Waves, Activity, Play, RefreshCw, Cpu, Layers, Zap } from 'lucide-react';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 type Mode = 'PARTICLES' | 'AUDIO_SYNTH';
 
@@ -180,10 +181,10 @@ export function InteractiveSandbox() {
 
         {/* Section Title */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white">
+          <FitText as="h2" text="INTERACTIVE SANDBOX." max={8} className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white">
             INTERACTIVE<br />
             <span className="text-[#FF2B2B]">SANDBOX.</span>
-          </h2>
+          </FitText>
           <p className="font-sans text-[#8A8A84] text-base sm:text-lg mt-4 max-w-2xl">
             A real-time playground combining canvas physics and generative sound synthesis—small, inspectable browser experiments.
           </p>

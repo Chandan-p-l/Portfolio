@@ -32,7 +32,7 @@ const MARQUEE_WORDS = [
   'OUR', 'INSPIRATION', 'BEGINS', 'WITH', 'CODE', 'IT\'S', 'ENGINEERING',
   'THE', 'PUREST', 'CONTEMPORARY', 'EXPRESSION', 'FUNCTION', 'TECHNOLOGICAL',
   'OF', 'THE', 'SOLUTIONS', 'EXTENSION', 'AN', 'AND', 'DESIGN', 'INNOVATION',
-  'PERSONALITY', 'CHANDAN PAL', 'WYTHER', 'TYPESCRIPT', 'VITE', 'REACT'
+  'PERSONALITY', 'CHANDAN PAL', 'WYTHHER', 'TYPESCRIPT', 'VITE', 'REACT'
 ];
 
 interface TileData {
@@ -245,7 +245,7 @@ export function CodeCanvasGrid({ isFullScreen = false, onCloseFullScreen }: Code
         {/* Artistic portrait with warm lighting tint */}
         <div className="absolute right-0 top-0 h-full w-full lg:w-3/4 opacity-40 mix-blend-screen overflow-hidden">
           <img
-            src="/hero-portrait.png"
+            src="/chandan-pal.webp"
             alt="Canvas Background"
             className="w-full h-full object-cover object-center filter contrast-125 saturate-150 brightness-90 hue-rotate-[-10deg]"
           />

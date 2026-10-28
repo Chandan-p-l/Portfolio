@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Terminal, Server, Database, Code, Cloud, Users, Activity, Play, CheckCircle2, Globe, Shield, Cpu, RefreshCw } from 'lucide-react';
 import { sound } from '../utils/sound';
+import { FitText } from './FitText';
 
 const REQUEST_HOPS = [
   { id: 'user', label: 'USER BROWSER', icon: Users, ip: 'CLIENT IP', latency: '0ms', desc: 'User requests https://chandanpal.dev/api/v1/products' },
@@ -55,10 +56,10 @@ export function BehindTheScreen() {
 
         {/* Section Title */}
         <div className="mb-16">
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tight leading-none text-white">
+          <FitText as="h2" text="NOT JUST SURFACES. THE ENTIRE ENGINE." max={6} className="font-display text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tight leading-none text-white">
             NOT JUST SURFACES.<br />
             <span className="text-[#FF2B2B]">THE ENTIRE ENGINE.</span>
-          </h2>
+          </FitText>
           <p className="font-sans text-[#8A8A84] text-base sm:text-lg mt-4 max-w-2xl">
             A software product is only as reliable as the systems underneath. Here is the millisecond journey of how a packet travels through my architecture.
           </p>
@@ -117,7 +118,7 @@ export function BehindTheScreen() {
 
                   <div>
                     <Icon className={`w-5 h-5 mb-2 ${isCurrent ? 'text-black' : 'text-white'}`} />
-                    <div className={`font-display font-black text-xs sm:text-sm tracking-tight ${isCurrent ? 'text-black' : 'text-white'}`}>
+                    <div className={`font-display font-black text-[10px] sm:text-xs lg:text-sm tracking-tight leading-tight [overflow-wrap:anywhere] ${isCurrent ? 'text-black' : 'text-white'}`}>
                       {hop.label}
                     </div>
                   </div>

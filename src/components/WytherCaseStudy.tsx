@@ -4,7 +4,7 @@ import { Server, Database, Shield, Cpu, Layers, ArrowUpRight, CheckCircle2, Chev
 import { sound } from '../utils/sound';
 import { PROJECTS } from '../data/portfolioData';
 
-const wytherProject = PROJECTS.find((p) => p.id === 'wyther') || PROJECTS[0];
+const wytherProject = PROJECTS.find((p) => p.id === 'wythher') || PROJECTS[0];
 
 const CHAPTERS = [
   {
@@ -118,7 +118,7 @@ export function WytherCaseStudy() {
             className="fixed inset-0 z-[9999] bg-[#FF2B2B] text-black flex flex-col justify-between p-8 sm:p-16 select-none"
           >
             <div className="flex items-center justify-between font-tech text-xs tracking-widest font-bold border-b border-black/20 pb-4">
-              <span>WYTHER // CHAPTER 06: TRANSITION</span>
+              <span>WYTHHER // CHAPTER 06: TRANSITION</span>
               <span>CP-2026</span>
             </div>
 
@@ -173,7 +173,7 @@ export function WytherCaseStudy() {
             VENTURE ARCHIVE // 2025 - 2026
           </div>
           <h2 className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[13rem] font-black tracking-tighter leading-none text-white uppercase hover:text-[#FF2B2B] transition-colors duration-300">
-            WYTHER
+            WYTHHER
           </h2>
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-white/10 pb-8">
             <span className="font-future text-base sm:text-xl text-neutral-300 tracking-wider">
@@ -245,7 +245,7 @@ export function WytherCaseStudy() {
                 className="space-y-6"
               >
                 <div className="flex items-center justify-between border-b border-white/10 pb-4 font-tech text-xs">
-                  <span className="text-[#FF2B2B] font-bold">WYTHER // {CHAPTERS[activeChapter].title}</span>
+                  <span className="text-[#FF2B2B] font-bold">WYTHHER // {CHAPTERS[activeChapter].title}</span>
                   <span className="text-[#8A8A84]">CHAPTER 0{activeChapter + 1} OF 05</span>
                 </div>
 
@@ -270,7 +270,7 @@ export function WytherCaseStudy() {
             </AnimatePresence>
 
             <div className="pt-8 mt-8 border-t border-white/10 flex justify-between items-center font-tech text-xs text-[#8A8A84]">
-              <span>WYTHER CASE STUDY</span>
+              <span>WYTHHER CASE STUDY</span>
               <button
                 onClick={() => handleChapterClick((activeChapter + 1) % CHAPTERS.length)}
                 className="text-[#FF2B2B] hover:text-white flex items-center gap-1 font-bold"
@@ -368,7 +368,7 @@ export function WytherCaseStudy() {
         {/* Full Tech Stack Pills for WythHer */}
         <div className="border border-white/15 bg-black/60 p-6 sm:p-8 mb-16">
           <div className="font-tech text-xs text-[#8A8A84] mb-4 tracking-widest uppercase">
-            WYTHER COMPLETE TECHNOLOGY STACK:
+            WYTHHER COMPLETE TECHNOLOGY STACK:
           </div>
           <div className="flex flex-wrap gap-2">
             {wytherProject.techStack.map((tech) => (

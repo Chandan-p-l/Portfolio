@@ -15,42 +15,49 @@ import {
   Copy,
   ExternalLink,
   ShieldCheck,
-  Activity
+  Activity,
+  BookOpen
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { PageTransition } from '../components/PageTransition';
 import { HeroCodeGrid } from '../components/HeroCodeGrid';
 import { IdCardModal } from '../components/IdCardModal';
 import { PROJECTS, CHANDAN_INFO } from '../data/portfolioData';
+import { POSTS, formatDate } from '../lib/blog';
+import { EXPERIENCE } from '../data/work';
+import { SITE } from '../site';
 import { sound } from '../utils/sound';
+import { FitText } from '../components/FitText';
+import { fitVars } from '../utils/fit';
 
-const featured = PROJECTS.slice(0, 4);
+const featured = PROJECTS.filter((p) => p.kind !== 'Book').slice(0, 4);
+const latestPosts = POSTS.filter((p) => !p.about).slice(0, 3);
 
 // Tech Arsenal Categories for Section 3
 const SKILL_CATEGORIES = [
   {
     id: '01',
-    title: 'FRONT-END & CREATIVE TECH',
-    tagline: 'High-frame-rate web experiences, custom shaders & micro-interactions.',
-    items: ['React 19', 'TypeScript', 'Vite / Next.js', 'TailwindCSS v4', 'Framer Motion', 'GSAP', 'HTML5 Canvas', 'Lenis Smooth Scroll']
+    title: 'FRONTEND & CREATIVE',
+    tagline: 'Fast, accessible interfaces with motion and micro-interactions.',
+    items: ['React 19', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Motion', 'HTML5 Canvas', 'Web Audio API']
   },
   {
     id: '02',
-    title: 'BACKEND & INFRASTRUCTURE',
-    tagline: 'High-throughput APIs, cluster management & idempotent payment pipelines.',
-    items: ['Node.js & Express', 'Python', 'PostgreSQL / Supabase', 'MongoDB & Redis', 'Nginx Reverse Proxy', 'PM2 Cluster', 'Docker & Linux', 'REST & WebSockets']
+    title: 'BACKEND & INFRA',
+    tagline: 'APIs, databases, payments and the servers that run them.',
+    items: ['Node.js & Express', 'PHP', 'Supabase', 'Firebase', 'MySQL & MongoDB', 'Linux & Nginx', 'PM2 & Vercel', 'Git & CI/CD']
   },
   {
     id: '03',
-    title: 'VENTURES & CTO ARCHITECTURE',
-    tagline: 'Taking zero-to-one startups from raw whiteboards to production revenues.',
-    items: ['Wyther Co-Founder', 'Vedavarti fragrance', 'System Architecture', 'Webhook Queues', 'Payment Integration', 'Logistics API', 'Admin Analytics', 'Security & TLS']
+    title: 'VENTURES & LEADERSHIP',
+    tagline: 'Taking zero-to-one products from a blank page to production.',
+    items: ['WythHer — CTO', 'VagMed India', 'VedaVarti storefront', 'LOQmusic app', 'D2C admin platform', 'Razorpay + COD', 'Technical SEO & GEO', 'Market analysis']
   },
   {
     id: '04',
-    title: 'BRAND & EDITORIAL DESIGN',
-    tagline: 'Aesthetic direction, visual tokens & brutalist editorial layouts.',
-    items: ['Figma Mastery', 'Brand Guidelines', 'Typography Systems', 'Design Tokens', 'Motion Storytelling', 'Film Aesthetics', 'Product Packaging', 'UX Audits']
+    title: 'DESIGN & BRAND',
+    tagline: 'Visual direction, design systems and editorial layouts.',
+    items: ['Figma', 'UI/UX Design', 'Typography Systems', 'Design Tokens', 'Motion Storytelling', 'Editorial Layouts', 'Storytelling', 'UX Audits']
   }
 ];
 
@@ -121,7 +128,7 @@ export function HomePage() {
   const portraitY = useTransform(
     smoothProgress,
     [0, 0.35],
-    isDesktop ? ['0px', '700px'] : ['0px', '250px']
+    isDesktop ? ['0px', '912px'] : ['0px', '0px']
   );
 
   const portraitRotate = useTransform(smoothProgress, [0, 0.18, 0.35], [0, -3, 0]);
@@ -140,7 +147,7 @@ export function HomePage() {
 
   return (
     <PageTransition>
-      <main className="bg-[#080809] text-[#F4F2EC] overflow-hidden font-sans selection:bg-[#FF2B2B] selection:text-white">
+      <div className="bg-[#080809] text-[#F4F2EC] overflow-hidden font-sans selection:bg-[#FF2B2B] selection:text-white">
         
         {/* ======================================================== */}
         {/* HERO SECTION WITH INTEGRATED CODE CANVAS GRID BACKGROUND */}
@@ -159,7 +166,7 @@ export function HomePage() {
           {/* Hero Foreground Content */}
           <div className="relative mx-auto flex min-h-[calc(100svh-10rem)] max-w-7xl flex-col justify-between z-20 pointer-events-none">
             <div className="flex items-start justify-between border-y border-black/20 py-3 font-tech text-[10px] uppercase tracking-[.2em] pointer-events-auto text-black font-bold">
-              <span>Chandan Pal / Independent Portfolio</span>
+              <span>Chandan Pal / Portfolio</span>
               <span className="hidden sm:block">Jaipur, India · 2026</span>
               <span>Scroll to enter ↓</span>
             </div>
@@ -172,14 +179,15 @@ export function HomePage() {
                   transition={{ duration: 0.55 }}
                   className="mb-4 font-tech text-xs font-extrabold uppercase tracking-[.35em] text-[#FF2B2B] pointer-events-auto"
                 >
-                  Developer · Founder · Product Builder
+                  Full-Stack Developer · CTO &amp; Co-founder, VagMed India
                 </motion.p>
-                <h1 className="font-display font-black uppercase leading-[.78] tracking-tight max-w-full overflow-visible pointer-events-none">
+                <h1 className="fit-box font-display font-black uppercase leading-[.78] tracking-tight max-w-full overflow-visible pointer-events-none">
                   <motion.span
                     initial={{ opacity: 0, y: 80 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="block text-black text-[8vw] sm:text-[6.2vw] lg:text-[4rem] xl:text-[4.8rem] 2xl:text-[5.4rem] font-black tracking-tight"
+                    style={fitVars('CHANDAN', 5.4)}
+                    className="fit text-black font-black tracking-tight"
                   >
                     CHANDAN
                   </motion.span>
@@ -187,7 +195,8 @@ export function HomePage() {
                     initial={{ opacity: 0, x: -90 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                    className="block text-[#FF2B2B] text-[18vw] sm:text-[14.5vw] lg:text-[9.2rem] xl:text-[10.8rem] 2xl:text-[12.2rem] font-black leading-[.72] tracking-tighter drop-shadow-sm"
+                    style={fitVars('PAL', 12.2)}
+                    className="fit text-[#FF2B2B] font-black leading-[.72] tracking-tighter drop-shadow-sm"
                   >
                     PAL
                   </motion.span>
@@ -198,6 +207,41 @@ export function HomePage() {
                   </p>
                   <span className="mb-1 font-tech text-[10px] uppercase tracking-wider text-black font-extrabold">01 / 06</span>
                 </div>
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.25 }}
+                  className="mt-6 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-neutral-700 pointer-events-auto"
+                >
+                  Full-stack developer from Jaipur and <strong className="text-black">CTO &amp; Co-founder of {SITE.company.name}</strong>,
+                  the company behind <strong className="text-black">WythHer</strong>. I built wythher.com, vagmed.com, vedavarti.com and
+                  the free music app LOQmusic — and wrote a novel. <strong className="text-[#FF2B2B]">Open to full-stack &amp; frontend roles.</strong>
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.35 }}
+                  className="mt-6 flex flex-wrap gap-3 pointer-events-auto"
+                >
+                  <Link
+                    to="/work"
+                    onClick={() => sound.playClick()}
+                    onMouseEnter={() => sound.playHover()}
+                    data-cursor-text="WORK"
+                    className="inline-flex items-center gap-3 bg-black text-white hover:bg-[#FF2B2B] px-6 py-4 font-tech text-xs font-bold uppercase tracking-widest transition-all shadow-xl"
+                  >
+                    SEE MY WORK <ArrowDownRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => sound.playClick()}
+                    onMouseEnter={() => sound.playHover()}
+                    data-cursor-text="HIRE"
+                    className="inline-flex items-center gap-3 border-2 border-black text-black hover:bg-black hover:text-white px-6 py-4 font-tech text-xs font-bold uppercase tracking-widest transition-all"
+                  >
+                    HIRE ME <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
               </motion.div>
 
               <motion.div
@@ -223,6 +267,7 @@ export function HomePage() {
                 </div>
 
                 {/* Floating micro-animation wrapper for GPU-Accelerated 3D Lanyard ID Card Badge */}
+                <div className="id-float pointer-events-none">
                 <motion.div
                   ref={cardRef}
                   onMouseMove={handleCardMouseMove}
@@ -230,12 +275,6 @@ export function HomePage() {
                   onClick={() => {
                     sound.playClick();
                     setIsIdModalOpen(true);
-                  }}
-                  animate={{
-                    y: [0, -10, 0],
-                  }}
-                  transition={{
-                    y: { repeat: Infinity, duration: 4, ease: 'easeInOut' },
                   }}
                   style={{
                     transformStyle: 'preserve-3d',
@@ -271,9 +310,9 @@ export function HomePage() {
                   {/* Enlarged Passport Photo Box Frame */}
                   <div className="relative my-3 aspect-[3.5/4.5] w-full overflow-hidden rounded-lg bg-black border-2 border-black shadow-lg">
                     <img
-                      src="/hero-portrait.png"
+                      src="/chandan-pal.webp"
                       alt="Chandan Pal Passport ID Photo"
-                      className="w-full h-full object-cover object-top scale-105 grayscale contrast-125 filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.9)]"
+                      className="w-full h-full object-cover object-top scale-105 grayscale contrast-125"
                     />
                     <div className="absolute bottom-2 right-2 bg-[#FF2B2B] text-black px-2 py-0.5 font-tech text-[8px] font-extrabold tracking-widest rounded-sm shadow">
                       PASSPORT PHOTO
@@ -288,28 +327,67 @@ export function HomePage() {
                     </div>
                     <div className="flex items-baseline justify-between border-b border-dashed border-black/25 pb-1">
                       <span className="text-neutral-500 font-bold uppercase">ROLE</span>
-                      <span className="font-tech font-extrabold text-[10px] text-[#FF2B2B]">DEVELOPER / CTO</span>
+                      <span className="font-tech font-extrabold text-[10px] text-[#FF2B2B]">CTO & CO-FOUNDER</span>
+                    </div>
+                    <div className="flex items-baseline justify-between border-b border-dashed border-black/25 pb-1">
+                      <span className="text-neutral-500 font-bold uppercase">COMPANY</span>
+                      <span className="font-tech font-extrabold text-[10px] text-black">VAGMED INDIA</span>
                     </div>
                     <div className="flex items-baseline justify-between">
                       <span className="text-neutral-500 font-bold uppercase">STATUS</span>
                       <span className="font-tech font-bold text-[10px] text-emerald-600 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        ACTIVE BUILDER
+                        OPEN TO ROLES
                       </span>
                     </div>
                   </div>
                 </motion.div>
+                </div>
               </motion.div>
             </div>
 
             <div className="grid grid-cols-2 border-t border-black/20 font-tech text-[10px] uppercase tracking-wider sm:grid-cols-4 pointer-events-auto text-black font-bold">
-              {['Products', 'Systems', 'Ventures', 'Experiments'].map((item, index) => (
-                <div key={item} className="border-r border-black/20 p-3 last:border-r-0 hover:bg-black/5 transition-colors">
+              {[
+                ['CTO · VagMed India', '/work/vagmed'],
+                ['Built wythher.com', '/work/wythher'],
+                ['LOQmusic · free music app', '/work/loqmusic'],
+                ['Author · The Last Conversation', '/work/the-last-conversation'],
+              ].map(([item, to], index) => (
+                <Link
+                  key={item}
+                  to={to}
+                  onClick={() => sound.playClick()}
+                  onMouseEnter={() => sound.playHover()}
+                  className="border-r border-black/20 p-3 last:border-r-0 hover:bg-[#FF2B2B] hover:text-white transition-colors"
+                >
                   <span className="mr-2 text-[#FF2B2B] font-extrabold">0{index + 1}</span>
                   {item}
-                </div>
+                </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SECTION 4: HIGH-DENSITY METRICS STRIP */}
+        {/* ======================================================== */}
+        <section className="bg-black py-12 border-b border-white/10 font-tech">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {[
+              { val: '04', label: 'LIVE PRODUCTS' },
+              { val: 'CTO', label: 'CO-FOUNDER, VAGMED INDIA' },
+              { val: '01', label: 'PUBLISHED NOVEL' },
+              { val: String(POSTS.filter((p) => !p.about).length), label: 'TECH ARTICLES' }
+            ].map((stat, idx) => (
+              <div key={idx} className="border-r border-white/10 last:border-r-0 p-4">
+                <FitText as="div" text={stat.val} max={3.75} className="font-display text-4xl sm:text-6xl font-black text-[#FF2B2B]">
+                  {stat.val}
+                </FitText>
+                <div className="text-[10px] sm:text-xs text-neutral-400 tracking-widest uppercase mt-2">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -325,12 +403,18 @@ export function HomePage() {
           </div>
 
           <div className="max-w-7xl mx-auto pt-4">
-            <div className="grid gap-12 lg:grid-cols-12 lg:items-end mb-16">
+            <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:min-h-[38rem] mb-16">
               {/* Heading occupies right columns cleanly while left area stays 100% open for the interactive ID card */}
-              <h2 className="font-display text-5xl sm:text-7xl lg:text-[7.5rem] font-black uppercase leading-[.85] tracking-tight lg:col-span-8 lg:col-start-5 text-white">
-                I BUILD PRODUCTS<br />
-                <span className="text-[#FF2B2B]">WITH A BACKBONE.</span>
-              </h2>
+              <div className="lg:col-span-8 lg:col-start-5">
+                <div className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] font-bold uppercase tracking-[.3em] mb-4">
+                  <Code2 className="w-4 h-4" />
+                  <span>01 // WHAT I DO</span>
+                </div>
+                <FitText as="h2" text="I BUILD PRODUCTS WITH A BACKBONE." max={7.5} className="font-display text-5xl sm:text-7xl lg:text-[4.5rem] xl:text-[5.25rem] 2xl:text-[6.5rem] font-black uppercase leading-[.85] tracking-tight text-white">
+                  I BUILD PRODUCTS<br />
+                  <span className="text-[#FF2B2B]">WITH A BACKBONE.</span>
+                </FitText>
+              </div>
             </div>
 
             {/* 3 Interactive Brutalist Cards with Hover Flip to Vibrant Red */}
@@ -338,27 +422,27 @@ export function HomePage() {
               {[
                 {
                   number: '01',
-                  title: 'MAKE IT USEFUL',
-                  tag: 'SYSTEMS & RELIABILITY',
-                  desc: 'The interface is only the beginning. I care deeply about the backend operation, payment webhooks, database indexing, and infrastructure behind it.',
-                  metric: '<0.12ms LATENCY',
+                  title: 'FULL-STACK DEVELOPMENT',
+                  tag: 'REACT · NEXT.JS · NODE',
+                  desc: 'I design and build complete products — frontend, backend, database, payments and deployment. wythher.com, vedavarti.com and LOQmusic are all live.',
+                  metric: 'LIVE IN PRODUCTION',
                   icon: Cpu
                 },
                 {
                   number: '02',
-                  title: 'MAKE IT FELT',
-                  tag: 'CREATIVE TECH & BRAND',
-                  desc: 'Products earn attention when they have a distinct point of view, high frame rates, film-grade aesthetics, and micro-interactions.',
-                  metric: '60 FPS ANIMATIONS',
-                  icon: Sparkles
+                  title: 'CTO & CO-FOUNDER',
+                  tag: 'VAGMED INDIA · WYTHHER',
+                  desc: 'I lead technology at VagMed India Private Limited, the Jaipur femtech company behind WythHer — storefront, admin platform, analytics and tech strategy.',
+                  metric: '2025 — PRESENT',
+                  icon: Zap
                 },
                 {
                   number: '03',
-                  title: 'MAKE IT MOVE',
-                  tag: 'VELOCITY & PROTOTYPES',
-                  desc: 'Ideas become real through rapid prototypes and deliberate launches. From raw Figma whiteboards to production revenues in weeks.',
-                  metric: '99.9% UPTIME',
-                  icon: Zap
+                  title: 'DESIGN, SEO & WRITING',
+                  tag: 'FIGMA · SEO · GEO',
+                  desc: 'I care how products feel and how people find them: UI/UX in Figma, technical SEO and structured data — and a blog that explains new tech plainly.',
+                  metric: `${POSTS.filter((p) => !p.about).length} ARTICLES`,
+                  icon: Sparkles
                 }
               ].map((card, idx) => (
                 <motion.article
@@ -382,9 +466,9 @@ export function HomePage() {
                       <card.icon className="w-4 h-4" />
                     </div>
 
-                    <h3 className="font-display text-3xl font-black uppercase text-white group-hover:text-black leading-tight mb-4">
+                    <FitText as="h3" text={card.title} max={1.6} className="font-display text-2xl font-black uppercase text-white group-hover:text-black leading-tight mb-4">
                       {card.title}
-                    </h3>
+                    </FitText>
 
                     <p className="font-sans text-sm text-neutral-400 group-hover:text-black/90 leading-relaxed max-w-xs">
                       {card.desc}
@@ -392,7 +476,7 @@ export function HomePage() {
                   </div>
 
                   <div className="pt-6 border-t border-white/10 group-hover:border-black/30 flex items-center justify-between font-tech text-[10px] font-bold uppercase tracking-widest text-[#FF2B2B] group-hover:text-black">
-                    <span>STATUS: ACTIVE</span>
+                    <span>WHAT I DO</span>
                     <span className="px-2 py-0.5 bg-black/40 group-hover:bg-black group-hover:text-white rounded">
                       {card.metric}
                     </span>
@@ -415,9 +499,9 @@ export function HomePage() {
                   <Terminal className="w-4 h-4" />
                   <span>02 // SELECTED WORK & PROOF</span>
                 </div>
-                <h2 className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white">
+                <FitText as="h2" text="THE PROOF." max={4.5} className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white">
                   THE PROOF<span className="text-[#FF2B2B]">.</span>
-                </h2>
+                </FitText>
               </div>
 
               <Link
@@ -436,7 +520,7 @@ export function HomePage() {
               {featured.map((project, idx) => (
                 <Link
                   key={project.id}
-                  to={project.id === 'wyther' ? '/work/wyther' : '/work'}
+                  to={`/work/${project.id}`}
                   onMouseEnter={() => sound.playHover()}
                   onClick={() => sound.playClick()}
                   className={`group relative min-h-[26rem] p-8 sm:p-10 border transition-all duration-500 overflow-hidden flex flex-col justify-between shadow-2xl ${
@@ -469,9 +553,9 @@ export function HomePage() {
                     <p className={`font-tech text-xs font-bold uppercase tracking-wider mb-2 ${idx === 0 ? 'text-black/80' : 'text-[#FF2B2B]'}`}>
                       {project.role} · {project.category}
                     </p>
-                    <h3 className={`font-display text-4xl sm:text-6xl font-black uppercase leading-none tracking-tight mb-4 ${idx === 0 ? 'text-black' : 'text-white group-hover:text-[#FF2B2B] transition-colors'}`}>
+                    <FitText as="h3" text={project.title} max={3.75} className={`font-display text-4xl sm:text-6xl font-black uppercase leading-none tracking-tight mb-4 ${idx === 0 ? 'text-black' : 'text-white group-hover:text-[#FF2B2B] transition-colors'}`}>
                       {project.title}
-                    </h3>
+                    </FitText>
                     <p className={`max-w-2xl font-sans text-sm sm:text-base leading-relaxed ${idx === 0 ? 'text-black/90 font-medium' : 'text-neutral-300'}`}>
                       {project.tagline}
                     </p>
@@ -508,21 +592,131 @@ export function HomePage() {
         </section>
 
         {/* ======================================================== */}
+        {/* SECTION 4B: THE BOOK                                       */}
+        {/* ======================================================== */}
+        <section className="relative bg-[#080809] px-4 py-24 sm:px-8 sm:py-32 lg:px-12 border-b border-white/10">
+          <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-12 items-center">
+            <motion.a
+              href={SITE.book.url}
+              target="_blank"
+              rel="noopener"
+              data-cursor-text="READ"
+              onMouseEnter={() => sound.playHover()}
+              initial={{ opacity: 0, rotate: -6, y: 40 }}
+              whileInView={{ opacity: 1, rotate: -3, y: 0 }}
+              whileHover={{ rotate: 0, y: -10 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-4 mx-auto w-60 sm:w-72 aspect-[5.5/8.5] bg-gradient-to-br from-[#2b0f0d] via-[#0E0E10] to-black border border-[#FF2B2B]/40 p-6 flex flex-col justify-between shadow-[18px_24px_60px_rgba(0,0,0,.6)]"
+            >
+              <span className="font-tech text-[10px] tracking-[.3em] text-[#FF2B2B] font-bold">A NOVEL</span>
+              <span className="font-editorial italic text-4xl leading-[1.05] text-white">The Last<br />Conversation</span>
+              <span className="font-tech text-[10px] tracking-[.3em] text-neutral-400">CHANDAN PAL</span>
+            </motion.a>
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] font-bold uppercase tracking-[.3em] mb-3">
+                <BookOpen className="w-4 h-4" />
+                <span>03 // ALSO AN AUTHOR</span>
+              </div>
+              <FitText as="h2" text="THE LAST CONVERSATION." max={4.5} className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white leading-[.9]">
+                THE LAST<br /><span className="text-[#FF2B2B]">CONVERSATION.</span>
+              </FitText>
+              <p className="mt-6 font-tech text-xs uppercase tracking-widest text-neutral-400">
+                {SITE.book.subtitle} · {SITE.book.pages} pages · {SITE.book.publisher}
+              </p>
+              <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-neutral-300">{SITE.book.blurb}</p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href={SITE.book.url}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => sound.playClick()}
+                  onMouseEnter={() => sound.playHover()}
+                  className="inline-flex items-center gap-3 bg-[#FF2B2B] text-black hover:bg-white px-6 py-4 font-tech text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  <span>GET IT ON POTHI.COM</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <Link
+                  to="/work/the-last-conversation"
+                  onClick={() => sound.playClick()}
+                  onMouseEnter={() => sound.playHover()}
+                  className="inline-flex items-center gap-3 bg-white/5 border border-white/15 hover:border-[#FF2B2B] px-6 py-4 font-tech text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  ABOUT THE BOOK
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
+        {/* SECTION 2B: EXPERIENCE                                     */}
+        {/* ======================================================== */}
+        <section className="relative bg-[#080809] px-4 py-24 sm:px-8 sm:py-32 lg:px-12 border-b border-white/10">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] font-bold uppercase tracking-[.3em] mb-3">
+              <Activity className="w-4 h-4" />
+              <span>04 // EXPERIENCE</span>
+            </div>
+            <FitText as="h2" text="WHERE I WORK." max={4.5} className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white border-b border-white/15 pb-8 mb-12">
+              WHERE I WORK<span className="text-[#FF2B2B]">.</span>
+            </FitText>
+            <div className="grid gap-6 md:grid-cols-2">
+              {EXPERIENCE.map((e, idx) => (
+                <motion.article
+                  key={e.role}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.12, duration: 0.5 }}
+                  onMouseEnter={() => sound.playHover()}
+                  className={`group relative p-8 border transition-all duration-300 hover:-translate-y-2 ${
+                    idx === 0 ? 'bg-[#FF2B2B] text-black border-[#FF2B2B]' : 'bg-[#0E0E10] border-white/10 hover:border-[#FF2B2B]'
+                  }`}
+                >
+                  <div className={`flex justify-between font-tech text-[10px] font-bold uppercase tracking-widest ${idx === 0 ? 'text-black/80' : 'text-[#FF2B2B]'}`}>
+                    <span>{e.period}</span>
+                    <span>{e.place}</span>
+                  </div>
+                  <FitText as="h3" text={e.role} max={1.875} className={`mt-6 font-display text-3xl font-black uppercase leading-tight ${idx === 0 ? 'text-black' : 'text-white'}`}>{e.role}</FitText>
+                  <p className={`mt-1 font-tech text-xs font-bold uppercase tracking-wider ${idx === 0 ? 'text-black' : 'text-neutral-300'}`}>
+                    {e.orgUrl ? (
+                      <a href={e.orgUrl} target="_blank" rel="noopener" className="underline underline-offset-4">{e.org}</a>
+                    ) : (
+                      e.org
+                    )}
+                  </p>
+                  <ul className={`mt-6 space-y-2 font-sans text-sm leading-relaxed ${idx === 0 ? 'text-black/90' : 'text-neutral-400'}`}>
+                    {e.points.map((pt) => (
+                      <li key={pt} className="flex gap-2">
+                        <span className={idx === 0 ? 'text-black font-bold' : 'text-[#FF2B2B] font-bold'}>›</span>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================== */}
         {/* SECTION 3: TECH ARSENAL & SKILLS MATRIX */}
         {/* ======================================================== */}
         <section className="relative bg-[#050506] px-4 py-24 sm:px-8 sm:py-32 lg:px-12 border-b border-white/10">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] font-bold uppercase tracking-[.3em] mb-3">
               <Layers className="w-4 h-4" />
-              <span>03 // TECH LAB & ARSENAL</span>
+              <span>05 // SKILLS & STACK</span>
             </div>
 
             <div className="flex flex-wrap items-end justify-between gap-6 border-b border-white/15 pb-8 mb-12">
-              <h2 className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white">
+              <FitText as="h2" text="THE CAPABILITIES." max={4.5} className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white">
                 THE CAPABILITIES<span className="text-[#FF2B2B]">.</span>
-              </h2>
+              </FitText>
               <p className="font-tech text-xs text-neutral-400 max-w-sm uppercase">
-                Production-proven stack across client rendering, edge gateways, database engines & visual systems.
+                The tools I use to ship real products — from interface to infrastructure.
               </p>
             </div>
 
@@ -540,13 +734,13 @@ export function HomePage() {
                 >
                   <div>
                     <div className="flex items-center justify-between font-tech text-xs text-[#FF2B2B] font-bold uppercase mb-4">
-                      <span>{cat.id} // MATRIX</span>
+                      <span>{cat.id} // STACK</span>
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     </div>
 
-                    <h3 className="font-display text-xl font-black uppercase text-white group-hover:text-[#FF2B2B] transition-colors mb-2">
+                    <FitText as="h3" text={cat.title} max={1.25} className="font-display text-xl font-black uppercase text-white group-hover:text-[#FF2B2B] transition-colors mb-2">
                       {cat.title}
-                    </h3>
+                    </FitText>
                     <p className="font-sans text-xs text-neutral-400 leading-relaxed mb-6">
                       {cat.tagline}
                     </p>
@@ -562,7 +756,6 @@ export function HomePage() {
                           <span className="text-[#FF2B2B] font-bold">›</span>
                           {item}
                         </span>
-                        <span className="text-[10px] text-neutral-600">PRODUCTION</span>
                       </div>
                     ))}
                   </div>
@@ -573,25 +766,64 @@ export function HomePage() {
         </section>
 
         {/* ======================================================== */}
-        {/* SECTION 4: HIGH-DENSITY METRICS STRIP */}
+        {/* SECTION 4C: LATEST WRITING                                 */}
         {/* ======================================================== */}
-        <section className="bg-black py-12 border-b border-white/10 font-tech">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { val: '04+', label: 'YEARS BUILDING' },
-              { val: '12+', label: 'SHIPPED VENTURES' },
-              { val: '99.9%', label: 'SYSTEM UPTIME' },
-              { val: '<50ms', label: 'API LATENCY' }
-            ].map((stat, idx) => (
-              <div key={idx} className="border-r border-white/10 last:border-r-0 p-4">
-                <div className="font-display text-4xl sm:text-6xl font-black text-[#FF2B2B]">
-                  {stat.val}
+        <section className="relative bg-[#050506] px-4 py-24 sm:px-8 sm:py-32 lg:px-12 border-b border-white/10">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12 flex flex-wrap items-end justify-between gap-6 border-b border-white/20 pb-6">
+              <div>
+                <div className="flex items-center gap-2 font-tech text-xs text-[#FF2B2B] font-bold uppercase tracking-[.3em] mb-2">
+                  <Code2 className="w-4 h-4" />
+                  <span>06 // TECH JOURNAL</span>
                 </div>
-                <div className="text-[10px] sm:text-xs text-neutral-400 tracking-widest uppercase mt-2">
-                  {stat.label}
-                </div>
+                <FitText as="h2" text="THE WRITING." max={4.5} className="font-display text-5xl sm:text-7xl font-black uppercase tracking-tight text-white">
+                  THE WRITING<span className="text-[#FF2B2B]">.</span>
+                </FitText>
               </div>
-            ))}
+              <Link
+                to="/blog"
+                onClick={() => sound.playClick()}
+                onMouseEnter={() => sound.playHover()}
+                className="group flex items-center gap-3 bg-white/5 hover:bg-[#FF2B2B] hover:text-black border border-white/15 px-6 py-3 font-tech text-xs font-bold uppercase tracking-widest transition-all"
+              >
+                <span>ALL ARTICLES</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {latestPosts.map((post, idx) => (
+                <motion.div
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                >
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    onClick={() => sound.playClick()}
+                    onMouseEnter={() => sound.playHover()}
+                    data-cursor-text="READ"
+                    className="group flex h-full flex-col justify-between gap-8 bg-[#0E0E10] border border-white/10 hover:border-[#FF2B2B] p-6 transition-all duration-300 hover:-translate-y-2"
+                  >
+                    <div>
+                      <div className="flex justify-between font-tech text-[10px] uppercase tracking-widest text-[#FF2B2B] font-bold mb-4">
+                        <span>{post.tags[0]}</span>
+                        <span className="text-neutral-500">{post.readingMinutes} MIN READ</span>
+                      </div>
+                      <FitText as="h3" text={post.title} max={1.25} className="font-display text-xl font-black uppercase leading-tight text-white group-hover:text-[#FF2B2B] transition-colors">
+                        {post.title}
+                      </FitText>
+                      <p className="mt-3 font-sans text-sm text-neutral-400 leading-relaxed line-clamp-3">{post.description}</p>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-white/10 pt-4 font-tech text-[10px] uppercase tracking-widest text-neutral-500">
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                      <ArrowUpRight className="w-4 h-4 text-[#FF2B2B]" />
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -604,13 +836,13 @@ export function HomePage() {
           <div className="relative max-w-7xl mx-auto">
             <div className="flex items-center gap-3 font-tech text-xs font-bold uppercase tracking-[.3em] mb-6">
               <span className="w-3 h-3 rounded-full bg-black animate-ping" />
-              <span>04 // CONTACT & COLLABORATION</span>
+              <span>07 // CONTACT & COLLABORATION</span>
             </div>
 
-            <h2 className="font-display text-6xl sm:text-8xl lg:text-[10rem] font-black uppercase leading-[.78] tracking-tighter mb-12">
+            <FitText as="h2" text="LET'S MAKE A MARK." max={10} className="font-display text-6xl sm:text-8xl lg:text-[10rem] font-black uppercase leading-[.78] tracking-tighter mb-12">
               LET’S MAKE<br />
               <span className="text-white text-stroke-black">A MARK.</span>
-            </h2>
+            </FitText>
 
             <div className="flex flex-wrap items-center gap-4">
               <Link
@@ -640,7 +872,7 @@ export function HomePage() {
 
         {/* Fullscreen Interactive ID Inspection Modal */}
         <IdCardModal isOpen={isIdModalOpen} onClose={() => setIsIdModalOpen(false)} />
-      </main>
+      </div>
     </PageTransition>
   );
 }
